@@ -1,6 +1,6 @@
 class UsersController < ApplicationController
 
-  before_filter :save_login_state, :only => [:new, :create]
+  before_action :save_login_state, :only => [:new, :create]
 
   def index
     @users = User.all.order(:nickname)
@@ -11,18 +11,19 @@ class UsersController < ApplicationController
   end
 
   def create
-    @user = User.new(params[:user])
+    @user = User.new(user_params)
     if @user.save
       flash[:notice] = "Signup successfull"
-    ##  redirect to login page da implementare
+      redirect_to users_path
     else
       flash[:notice] = "Form invalid"
       flash[:color]  = "invalid"
       render "new"
+    end
   end
 
   private
   def user_params
-    params.require(:user).permit(:name, :surname, :gender, :birthdate, :nickname, :email, :city, :description)
+    params.require(:user).permit(:name, :surname, :gender, :birthdate, :nickname, :email, :city, :password, :password_confirmation)
   end
 end

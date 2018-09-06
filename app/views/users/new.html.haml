@@ -1,0 +1,32 @@
+
+%div.Sign_Form
+  %h1 Sign Up
+  = form_tag users_path, :method => :post do
+    %p Name:
+    = text_field :user, :name
+
+    %p Surname:
+    = text_field :user, :surname
+
+    %p Sex:
+    = select :user, :gender, ['M', 'F']
+
+    %p Birth Date:
+    = date_select :user, :birthdate
+
+    %p Username:
+    = text_field :user, :nickname
+
+    %p Email:
+    = text_field :user, :email
+
+    %p City:
+    = text_field :user, :city
+
+    %p Password:
+    = password_field :user, :password
+
+    %p Password Confirmation:
+    = password_field :user, :password_confirmation
+
+    = submit_tag 'Signup'
