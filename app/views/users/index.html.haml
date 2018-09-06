@@ -1,0 +1,26 @@
+%h1 All Users
+
+%table#users
+  %thead
+    %tr
+      %th
+      %th User Nickname
+      %th Name
+      %th Surname
+      %th Sex
+      %th Birth Date
+      %th E-mail
+      %th Description
+      %th City
+  %tbody
+    - @users.each_with_index do |u, idx|
+      %tr
+        %td #{idx + 1}
+        %td= u.nickname
+        %td= u.name
+        %td= u.surname
+        %td= u.gender
+        %td= u.birthdate
+        %td= u.email
+        %td= u.description
+        %td= u.city
