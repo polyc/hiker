@@ -1,0 +1,13 @@
+%h1 All Hikes
+
+%table#hikes
+  %thead
+    %tr
+      %th
+      %th Title
+  %tbody
+    - @hikes.each_with_index do |h, idx|
+      %tr
+        %td #{idx + 1}
+        %td= u.name
+  //= link_to 'add_hike', new_hike_path

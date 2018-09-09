@@ -1,7 +1,7 @@
 class HikesController < ApplicationController
 
   def index
-    @hikes = Hike.all.order(:timestamps)
+    @hikes = Hike.all.order(:created_at)
   end
 
   def new
