@@ -10,7 +10,33 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20180905145950) do
+ActiveRecord::Schema.define(version: 20180909103457) do
+
+  create_table "comments", force: :cascade do |t|
+    t.text "comment"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "hikes", force: :cascade do |t|
+    t.string "name"
+    t.string "address"
+    t.float "latitude"
+    t.float "longitude"
+    t.text "equipment"
+    t.string "difficulty"
+    t.float "distance"
+    t.float "avg_time"
+    t.text "nature"
+    t.float "max_height"
+    t.float "min_height"
+    t.float "level_difference"
+    t.float "rating"
+    t.string "type"
+    t.text "description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string "name"
