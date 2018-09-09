@@ -21,7 +21,9 @@ gem 'uglifier', '>= 1.3.0'
 # use Haml for templates
 gem 'haml'
 #Use Bcrypt for password encryption
-gem 'bcrypt-ruby', :require => 'bcrypt' 
+gem 'bcrypt-ruby', :require => 'bcrypt'
+# Use OmniAuth for third party authentication
+gem 'omniauth-facebook'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
