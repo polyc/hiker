@@ -24,6 +24,8 @@ gem 'haml'
 gem 'bcrypt-ruby', :require => 'bcrypt'
 # Use OmniAuth for third party authentication
 gem 'omniauth-facebook'
+# Use Geocoder gem for handling space coordinates
+gem 'geocoder'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
