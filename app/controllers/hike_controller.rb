@@ -1,2 +1,0 @@
-class HikeController < ApplicationController
-end
