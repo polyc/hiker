@@ -2,6 +2,7 @@ Rails.application.routes.draw do
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :users
+  resources :hikes
 	#root :to => redirect('/users')
 
   root :to => redirect('/users')
@@ -15,6 +16,8 @@ Rails.application.routes.draw do
   post "login_attempt", :to => "sessions#login_attempt"
 
   get "hikes", :to => "hikes#index"
+  get "hikes", :to => "hikes#new"
+  post "hikes", :to => "hikes#create"
 
   #get 'comments/create,'
   #get 'comments/update,'

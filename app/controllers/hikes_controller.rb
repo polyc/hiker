@@ -1,5 +1,8 @@
 class HikesController < ApplicationController
 
+  before_action :authenticate_user, :only => [:new, :create, :index]
+  #before_action :save_login_state, :only => [:new, :create]
+
   def index
     @hikes = Hike.all.order(:created_at)
   end
@@ -21,7 +24,7 @@ class HikesController < ApplicationController
 
   private
   def hike_params
-    params.require(:hike).permit(:name, :address, :equipment, :difficulty, :distance, :nature, :max_height, :min_height, :rating, :type, :description)
+    params.require(:hike).permit(:name, :difficulty, :nature, :rating, :tipo)
   end
 
 end

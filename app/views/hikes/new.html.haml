@@ -1,0 +1,19 @@
+%div.Hike_form
+  %h1 Hike form
+  = form_tag hikes_path, :method => :post do
+    %p Name:
+    = text_field :hike, :name
+
+    %p  Difficulty:
+    = select :hike, :difficulty, [ 'P', 'I', 'E' ]
+
+    %p Nature
+    = text_area :hike, :nature
+
+    %p Rating
+    = select :hike, :rating, [ '0', '0.5', '1', '1.5', '2', '2.5', '3', '3.5', '4', '4.5', '5' ]
+
+    %p Type
+    = select :hike, :tipo, [ 'T', 'E', 'EE', 'EEA', 'EAI' ]
+
+    = submit_tag 'Create hike'

@@ -2,9 +2,7 @@ class CreateHikes < ActiveRecord::Migration[5.1]
   def change
     create_table :hikes do |t|
       t.string :name
-      t.string :address
-      t.float :latitude
-      t.float :longitude
+      t.string :route
       t.text :equipment
       t.string :difficulty
       t.float :distance
@@ -14,7 +12,7 @@ class CreateHikes < ActiveRecord::Migration[5.1]
       t.float :min_height
       t.float :level_difference
       t.float :rating
-      t.string :type
+      t.string :tipo
       t.text :description
 
       t.timestamps
