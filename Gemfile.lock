@@ -406,6 +406,7 @@ PLATFORMS
 DEPENDENCIES
   bcrypt-ruby
   byebug
+  capybara
   coffee-rails (~> 4.2)
   cucumber-rails
   cucumber-rails-training-wheels
@@ -416,6 +417,7 @@ DEPENDENCIES
   haml
   jasmine-rails
   jbuilder (~> 2.5)
+  launchy
   listen (>= 3.0.5, < 3.2)
   metric_fu
   omniauth-facebook
