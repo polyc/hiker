@@ -5,9 +5,31 @@
     %tr
       %th
       %th Title
+      %th Difficulty
+      %th Distance
+      %th Time
+      %th Max height
+      %th Min height
+      %th Level difference
+      %th Rating
+      %th Type
+      %th Nature
+      %th Equipment
+      //%th Routes
   %tbody
     - @hikes.each_with_index do |h, idx|
       %tr
         %td #{idx + 1}
-        %td= u.name
+        %td= h.name
+        %td= h.difficulty
+        %td= h.distance
+        %td= h.avg_time
+        %td= h.max_height
+        %td= h.min_height
+        %td= h.level_difference
+        %td= h.rating
+        %td= h.tipo
+        %td= h.nature
+        %td= h.equipment
+        //%td= h.route
   = link_to 'add_hike', new_hike_path

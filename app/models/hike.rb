@@ -14,23 +14,23 @@ class Hike < ActiveRecord::Base
 
   FILENAME_REGEX = /\.gpx$/i
 
-  validates :name, :presence => true, :length => { :in => 3..20 }
-  validates :difficulty, :presence => true, :inclusion => { :in => Hike.all_difficulty}
+  validates :name, :presence => true, :length => { :in => 1..20 }
+  validates :difficulty, :presence => true, :inclusion => { :in => %w( P I E )}
   #validates :filename, :format => FILENAME_REGEX
   #validates :nature, :length => { :in 0..128 }
-  validates :rating, :presence => true, :inclusion => { :in => Hike.all_ratings}
-  validates :tipo, :presence => true, :inclusion =>  { :in => Hike.all_types }
+  validates :rating, :presence => true, :inclusion => 0..5
+  validates :tipo, :presence => true, :inclusion =>  { :in => %w( T E EE EEA EAI ) }
 
   before_save :parse_gpx
   after_save :destroy_gpxfile
 
-  def self.parse_gpx
+  def parse_gpx
     r = Array.new
     max = 0.0
     min = 10000.0
     count = 0
-    init_time = nil
-    finish_time = nil
+    init_time = 0.0
+    finish_time = 0.0
     length = 0.0
 
     if filename.present?
@@ -40,7 +40,7 @@ class Hike < ActiveRecord::Base
 
       trackpoints.each do |trkpt|
         if count = 0
-          init_time = Time.parse(trkpt.xpath('/time').to_s).to_f
+          init_time = Time.parse(trkpt.text.strip.to_s).to_f
         end
         if max < trkpt.text.strip.to_f
           max = trkpt.text.strip.to_f
@@ -48,23 +48,24 @@ class Hike < ActiveRecord::Base
         if min > trkpt.text.strip.to_f
           min = trkpt.text.strip.to_f
         end
-        finish_time = Time.parse(trkpt.xpath('/time').to_s).to_f
+        finish_time = Time.parse(trkpt.text.strip.to_s).to_f
         lat = trkpt.xpath('@lat').to_s.to_f
         lon = trkpt.xpath('@lon').to_s.to_f
         ele = trkpt.text.strip.to_f
         r << {lat: lat, lon: lon, ele: ele}
+        count += 1
       end
-      for i in r.length-1 do
-        length+= Geocoder::Calculations.distance_between([r[i][lat].to_f, r[i][lon].to_f], [r[i+1][lat].to_f, r[i+1][lon].to_f])
+
+      for i in 0..(r.length-2) do
+        length += Geocoder::Calculations.distance_between([r[i][:lat].to_f,r[i][:lon].to_f], [r[i+1][:lat].to_f,r[i+1][:lon].to_f])
       end
-      count+=1
-      self.avg_time = finish_time-init_time
-      self.distance = length.to_f
-      self.max_height = max
-      self.min_height = min
-      self.level_difference = max-min
-      self.route = r.to_json
     end
+    self.avg_time = finish_time-init_time
+    self.distance = length.to_f.round(2)
+    self.max_height = max.round(2)
+    self.min_height = min.round(2)
+    self.level_difference = (max-min).round(2)
+    self.route = r.to_json
   end
 
   def destroy_gpxfile

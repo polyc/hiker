@@ -1,7 +1,6 @@
 class HikesController < ApplicationController
 
   before_action :authenticate_user, :only => [:new, :create, :index]
-  #before_action :save_login_state, :only => [:new, :create]
 
   def index
     @hikes = Hike.all.order(:created_at)
@@ -15,7 +14,7 @@ class HikesController < ApplicationController
     @hike = Hike.new(hike_params)
       if @hike.save
         flash[:notice]= "Hike created successfully"
-        #redirect_to hike_path
+        redirect_to hikes_path
       else
         flash[:warning]= "Invalid form compilation"
         render "new"
@@ -24,7 +23,7 @@ class HikesController < ApplicationController
 
   private
   def hike_params
-    params.require(:hike).permit(:name, :difficulty, :nature, :rating, :tipo)
+    params.require(:hike).permit(:name, :difficulty, :nature, :rating, :tipo, :filename)
   end
 
 end
