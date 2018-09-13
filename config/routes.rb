@@ -3,8 +3,7 @@ Rails.application.routes.draw do
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
   resources :users
   resources :hikes
-	#root :to => redirect('/users')
-
+  
   root :to => redirect('/users')
   get "signup", :to => "users#new"
 
@@ -19,6 +18,7 @@ Rails.application.routes.draw do
   get "hikes", :to => "hikes#new"
   post "hikes", :to => "hikes#create"
 
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   #get 'comments/create,'
   #get 'comments/update,'
   #get 'comments/show,'
