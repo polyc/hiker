@@ -1,12 +1,18 @@
 class User < ActiveRecord::Base
 
+  has_many :comments
+  has_many :hikes, :through => :comments
+  has_many :hikes, :dependent => :destroy
+
+  devise :omniauthable, :omniauth_providers => [:facebook]
+
   attr_accessor :password
   attr_accessor :password_confirmation
   EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :name, :presence => true, :length => { :in => 3..20 }
   validates :surname, :presence => true, :length => { :in => 3..20 }
   validates :nickname, :presence => true, :length => { :in => 3..20 }
-  validates :gender, :presence => true
+  validates :gender, :presence => true, :inclusion => { :in => %w(M F)}
   validates :email, :presence => true, :uniqueness => true#, :format => EMAIL_REGEX
   validates :birthdate, :presence => true
   #validates :description, :length => { :in => 1..256 }
@@ -43,5 +49,28 @@ class User < ActiveRecord::Base
   def match_password(login_password="")
     encrypted_password == BCrypt::Engine.hash_secret(login_password, salt)
   end
+
+  #third party auth methods
+  #########################
+  def self.new_with_session(params, session)
+  super.tap do |user|
+    if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
+      user.email = data["email"] if user.email.blank?
+    end
+  end
+end
+
+def self.from_omniauth(auth)
+  where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
+    user.id = auth.uid
+    user.email = auth.info.email
+    user.password = Devise.friendly_token[0,20]
+    user.name = auth.info.first_name   # assuming the user model has a name
+    user.surname = auth.info.last_name
+    user.birthdate = auth.info.birthday
+    user.city = auth.info.hometown
+    user.image = auth.info.image # assuming the user model has an image
+  end
+end
 
 end
