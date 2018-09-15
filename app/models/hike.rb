@@ -4,7 +4,7 @@ class Hike < ActiveRecord::Base
   require 'json'
 
   has_many :comments, :dependent => :destroy
-  has_many :users, :through => :comments
+  belongs_to :user
 
   def self.all_ratings ; %w[ 0 0.5 1 1.5 2 2.5 3 3.5 4 4.5 5 ] ; end
   def self.all_types ; %w[ T E EE EEA EAI ] ; end

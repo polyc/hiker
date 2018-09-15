@@ -1,0 +1,57 @@
+%h2 #{@hike.name}
+
+%ul#details
+
+  %li
+    Rating:
+    = @hike.rating
+
+  %li
+    Difficulty:
+    = @hike.difficulty
+
+  %li
+    Distance:
+    = @hike.distance.to_s+" km"
+
+  %li
+    Level difference
+    = @hike.level_difference.to_s+" meters"
+
+  %li
+    Type
+    = @hike.tipo
+
+  %li
+    User_id
+    = link_to "#{User.find(@hike.user_id).nickname}", user_path(User.find(@hike.user_id).id)
+
+%h3 Description
+= @hike.description
+
+%h3 Nature
+= @hike.nature
+
+%h3 Equipment
+= @hike.equipment
+
+%table#comments
+  %thead
+    %tr
+      %th Comment
+      %th User
+      %th
+
+  %tbody
+    - Comment.where(hike_id: @hike.id).each do |c|
+      %tr
+        %td= c.comment
+        %td= link_to "#{User.find(c.user_id).nickname}", user_path(c.user_id)
+        %td= link_to "delete comment", hike_comment_path(hike_id: @hike.id, id: c.id), :method => :delete
+
+
+= link_to 'create comment', new_hike_comment_path(@hike)
+
+= link_to 'hikes', hikes_path
+%br
+= link_to 'users', users_path

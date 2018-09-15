@@ -1,0 +1,10 @@
+
+%div.Comment_form
+  %h1 Comment form
+  = form_tag hike_comments_path, :method => :post do
+
+    %p Commento:
+    = text_area :comment, :comment
+
+    = debug(@comment)
+    = submit_tag 'Create comment'

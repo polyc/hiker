@@ -1,0 +1,35 @@
+%h1 #{@user.nickname}
+
+%table#hikes
+  %thead
+    %tr
+      %th Title
+      %th Difficulty
+      %th Distance
+      %th Time
+      %th Max height
+      %th Min height
+      %th Level difference
+      %th Rating
+      %th Type
+      %th Nature
+      %th Equipment
+
+  %tbody
+    - Hike.where(user_id: @user.id).each do |h|
+      %tr
+        %td= link_to "#{h.name}", hike_path(h)
+        %td= h.difficulty
+        %td= h.distance
+        %td= h.avg_time
+        %td= h.max_height
+        %td= h.min_height
+        %td= h.level_difference
+        %td= h.rating
+        %td= h.tipo
+        %td= h.nature
+        %td= h.equipment
+
+  = link_to 'hikes', hikes_path
+  %br
+  = link_to 'users', users_path
