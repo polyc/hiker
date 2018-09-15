@@ -15,7 +15,7 @@
     = text_area :hike, :equipment
 
     %p Description
-    = text_area :hike, :description 
+    = text_area :hike, :description
 
     %p Rating:
     = select :hike, :rating, %w( 0 0.5 1 1.5 2 2.5 3 3.5 4 4.5 5 )
@@ -26,5 +26,5 @@
     %p File GPX
     = file_field :hike, :filename
 
-
+    = debug(@hike)
     = submit_tag 'Create hike'

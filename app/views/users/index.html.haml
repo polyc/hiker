@@ -16,7 +16,7 @@
     - @users.each_with_index do |u, idx|
       %tr
         %td #{idx + 1}
-        %td= u.nickname
+        %td= link_to "#{u.nickname}", user_path(u.id)
         %td= u.name
         %td= u.surname
         %td= u.gender
