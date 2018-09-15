@@ -14,6 +14,7 @@ class CreateHikes < ActiveRecord::Migration[5.1]
       t.float :rating
       t.string :tipo
       t.text :description
+      t.references :user
 
       t.timestamps
     end
