@@ -12,4 +12,11 @@
   - elsif flash[:warning]
     #warning.message= flash[:warning]
   #main
+    -if session[:user_id].nil?
+      =link_to 'user', login_path
+    -else
+      =link_to 'user', user_path(User.find(session[:user_id]).id)
+    = link_to 'hikes', hikes_path
+    = link_to 'logout', logout_path
+
     = yield
