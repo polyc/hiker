@@ -8,6 +8,8 @@ Rails.application.routes.draw do
 
   root :to => redirect('/users')
   get "signup", :to => "users#new"
+  get "hike_preferencies_setup", :to => "users#hike_preferencies_setup"
+  put "hike_preferencies_setup", :to => "users#hike_preferencies_update"
 
   get "login", :to => "sessions#login"
   get "logout", :to => "sessions#logout"
