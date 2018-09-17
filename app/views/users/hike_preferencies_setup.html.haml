@@ -1,0 +1,34 @@
+%div.Hike_Preferencies_Setup_Form
+
+%h1 What types of hike do you like to see in your home feed?
+
+= form_tag hike_preferencies_setup_path, :method => :put do
+
+  Tourist
+  = check_box_tag 'hike_pref[]', 'T', true
+  %br
+  %br
+
+  Hiking
+  = check_box_tag 'hike_pref[]', 'E', true
+  %br
+  %br
+
+  Expert Hiking
+  = check_box_tag 'hike_pref[]', 'EE', true
+  %br
+  %br
+
+  Expert Equipped Hiking
+  = check_box_tag 'hike_pref[]', 'EEA', true
+
+  %br
+  %br
+
+  Hiking in Snowy Environment
+  = check_box_tag 'hike_pref[]' , 'EAI', true
+
+  %br
+  %br
+
+  = submit_tag 'Go to my Home Feed'
