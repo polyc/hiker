@@ -11,6 +11,7 @@ class CreateUsers < ActiveRecord::Migration[5.1]
       t.string :city
       t.string :encrypted_password
       t.string :salt
+      t.string :hike_pref
 
       t.timestamps
     end
