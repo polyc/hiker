@@ -15,11 +15,7 @@ Rails.application.routes.draw do
   get "profile", :to => "sessions#profile"
   get "setting", :to => "sessions#setting"
   post "login_attempt", :to => "sessions#login_attempt"
-
-  #get "hikes", :to => "hikes#index"
-  #get "hikes", :to => "hikes#new"
-  #post "hikes", :to => "hikes#create"
-  #get "hikes", :to => "hikes#show"
+  get "search", :to => "sessions#index"
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   #get 'comments/create,'

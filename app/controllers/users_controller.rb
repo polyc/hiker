@@ -1,6 +1,7 @@
 class UsersController < ApplicationController
 
   before_action :save_login_state, :only => [:new, :create]
+  before_action :authenticate_user, :only => [:show]
 
   def index
     @users = User.all.order(:nickname)
