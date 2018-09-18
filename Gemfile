@@ -74,7 +74,8 @@ group :test do
   gem 'cucumber-rails-training-wheels'
   gem 'capybara'
   gem 'database_cleaner'
-  gem 'factory_girl_rails'
+  gem 'factory_bot_rails'
   gem 'metric_fu'
   gem 'launchy'
+  gem 'selenium-webdriver'
 end
