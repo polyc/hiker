@@ -28,6 +28,10 @@ gem 'omniauth-facebook'
 gem 'devise', '~> 4.2'
 # Use Geocoder gem for handling space coordinates
 gem 'geocoder'
+# Use gmaps4rails for google maps
+gem 'gmaps4rails'
+#Use polyline to draw path on gmaps
+gem 'polylines'
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
