@@ -47,11 +47,10 @@
       %tr
         %td= c.comment
         %td= link_to "#{User.find(c.user_id).nickname}", user_path(c.user_id)
-        %td= link_to "delete comment", hike_comment_path(hike_id: @hike.id, id: c.id), :method => :delete
+        %td= link_to "delete comment", hike_comment_path(hike_id: @hike.id, id: c.id), :method => :delete, data: { confirm: "Are you sure?" }
 
-
+//= render "/comments/new", :hike_id => @hike
 = link_to 'create comment', new_hike_comment_path(@hike)
 
-= link_to 'hikes', hikes_path
 %br
 = link_to 'users', users_path
