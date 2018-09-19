@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  before_action :authenticate_user, :only => [:home, :profile, :setting, :search]
+  before_action :authenticate_user, :only => [:home, :profile, :setting, :search, :change_email, :update_email, :change_password, :update_password]
   before_action :save_login_state, :only => [:login, :login_attempt]
 
   def login
@@ -36,6 +36,33 @@ class SessionsController < ApplicationController
   end
 
   def setting
+    id = session[:user_id]
+    @user = User.find(id)
+  end
+
+  def change_password
+
+  end
+
+  def update_password
+    id = session[:user_id]
+    @user = User.find(id)
+    @user.password = params[:password]
+    @user.save
+    flash[:notice] = "Password was successfully changed"
+    redirect_to setting_path
+  end
+
+  def change_email
+
+  end
+
+  def update_email
+    id = session[:user_id]
+    @user = User.find(id)
+    @user.update_attribute(:email, params[:email])
+    flash[:notice] = "Email was successfully changed"
+    redirect_to setting_path
   end
 
   def logout

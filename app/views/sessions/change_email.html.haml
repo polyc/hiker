@@ -1,0 +1,7 @@
+%div.Change_Email_Form
+  %h1 Change Email
+  = form_tag change_email_path, :method => :post do
+    %p New Email:
+    = email_field_tag 'email'
+
+    = submit_tag 'Save'

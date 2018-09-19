@@ -18,6 +18,10 @@ Rails.application.routes.draw do
   get "setting", :to => "sessions#setting"
   post "login_attempt", :to => "sessions#login_attempt"
   get "search", :to => "sessions#index"
+  get "change_password", :to => "sessions#change_password"
+  post "change_password", :to => "sessions#update_password"
+  get "change_email", :to => "sessions#change_email"
+  post "change_email", :to => "sessions#update_email"
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   #get 'comments/create,'
