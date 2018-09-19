@@ -36,7 +36,8 @@ class UsersController < ApplicationController
   def hike_preferencies_update
     @user = User.find(session["tmp_id"])
 		@user.update_attribute(:hike_pref, params[:hike_pref])
-		flash[:notice] = "#{@user.nickname} was successfully update"
+    session["tmp_id"] = nil
+		flash[:notice] = "Your hike's preferencies were successfully updated"
 		redirect_to users_path
   end
 
