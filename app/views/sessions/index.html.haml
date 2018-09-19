@@ -1,0 +1,22 @@
+%h1 Search results
+
+%h4 Hikes
+%table#hikes
+  %thead
+    %tr
+      %th
+
+  %tbody
+    - @hikes.each do |h|
+      %tr
+        %td= link_to "#{h.name}", hike_path(h)
+%h4 Users
+%table#users
+  %thead
+    %tr
+      %th
+
+  %tbody
+    - @users.each do |u|
+      %tr
+        %td= link_to "#{u.nickname}", user_path(u)
