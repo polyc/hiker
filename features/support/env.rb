@@ -11,6 +11,9 @@ require 'capybara/cucumber'
 Capybara.default_max_wait_time = 20
 Capybara.default_driver = :selenium
 Capybara.run_server = false
+Capybara.register_driver :selenium do |app|
+  Capybara::Selenium::Driver.new(app, browser: :chrome)
+end
 
 # Capybara defaults to CSS3 selectors rather than XPath.
 # If you'd prefer to use XPath, just uncomment this line and adjust any
