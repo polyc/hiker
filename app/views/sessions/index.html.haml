@@ -10,6 +10,12 @@
     - @hikes.each do |h|
       %tr
         %td= link_to "#{h.name}", hike_path(h)
+
+%p Doesn't found the hike you were looking for?
+= link_to "Add it yourself!", new_hike_path
+
+
+
 %h4 Users
 %table#users
   %thead
