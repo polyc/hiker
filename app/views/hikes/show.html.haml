@@ -24,7 +24,10 @@
 
   %li
     User_id
-    = link_to "#{User.find(@hike.user_id).nickname}", user_path(User.find(@hike.user_id).id)
+    -if User.find(@hike.user_id).id == session[:user_id]
+      = link_to "#{User.find(@hike.user_id).nickname}", profile_path
+    -else
+      = link_to "#{User.find(@hike.user_id).nickname}", user_path(User.find(@hike.user_id).id)
 
 %h3 Description
 = @hike.description
