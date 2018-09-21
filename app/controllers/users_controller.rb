@@ -18,7 +18,7 @@ class UsersController < ApplicationController
 
   def add_following
     @user = User.find(session[:user_id])
-    @user.followers.create!(followed: params[:id].to_i)
+    @user.active_relationships.create(followed_id: params[:format].to_i)
     redirect_to users_path
   end
 
