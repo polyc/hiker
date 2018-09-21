@@ -12,6 +12,7 @@
       %th E-mail
       %th Description
       %th City
+      %th
   %tbody
     - @users.each_with_index do |u, idx|
       %tr
@@ -24,10 +25,8 @@
         %td= u.email
         %td= u.description
         %td= u.city
+        %td= link_to "follow", add_following_path(u.id), method: :post
+
   = link_to 'add user', new_user_path
   %br
-  = link_to 'hikes', hikes_path
-  %br
   = link_to 'login', login_path
-  %br
-  = link_to 'logout', logout_path
