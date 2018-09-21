@@ -4,7 +4,7 @@ class User < ActiveRecord::Base
   has_many :hikes, :through => :comments
   has_many :hikes, :dependent => :destroy
 
-  devise :omniauthable, :omniauth_providers => [:facebook]
+  devise :omniauthable, omniauth_providers: %i[facebook]
 
   attr_accessor :password
   attr_accessor :password_confirmation
@@ -12,9 +12,9 @@ class User < ActiveRecord::Base
   validates :name, :presence => true, :length => { :in => 3..20 }
   validates :surname, :presence => true, :length => { :in => 3..20 }
   validates :nickname, :presence => true, :length => { :in => 3..20 }
-  validates :gender, :presence => true, :inclusion => { :in => %w(M F)}
+  validates :gender, :presence => true, :inclusion => { :in => %w(male female)}
   validates :email, :presence => true, :uniqueness => true#, :format => EMAIL_REGEX
-  validates :birthdate, :presence => true
+  #validates :birthdate, :presence => true
   #validates :description, :length => { :in => 1..256 }
   validates :password, :confirmation => true #password_confirmation attr
   validates_length_of :password, :in => 6..20, :on => :create
@@ -31,6 +31,7 @@ class User < ActiveRecord::Base
 
   def clear_password
     self.password = nil
+    self.password_confirmation = nil
   end
 
   def self.authenticate(username_or_email="", login_password="")
@@ -53,24 +54,25 @@ class User < ActiveRecord::Base
   #third party auth methods
   #########################
   def self.new_with_session(params, session)
-  super.tap do |user|
-    if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
-      user.email = data["email"] if user.email.blank?
+    super.tap do |user|
+      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
+        user.email = data["email"] if user.email.blank?
+      end
     end
   end
-end
 
-def self.from_omniauth(auth)
-  where(provider: auth.provider, uid: auth.uid).first_or_create do |user|
-    user.id = auth.uid
-    user.email = auth.info.email
-    user.password = Devise.friendly_token[0,20]
-    user.name = auth.info.first_name   # assuming the user model has a name
-    user.surname = auth.info.last_name
-    user.birthdate = auth.info.birthday
-    user.city = auth.info.hometown
-    user.image = auth.info.image # assuming the user model has an image
+  def self.from_omniauth(auth)
+   where(provider: auth.provider, uid: auth.uid).first_or_create! do |user|
+      user.email = auth.info.email
+      user.password = Devise.friendly_token[0,20]
+      user.name = auth.info.first_name   # assuming the user model has a name
+      user.surname = auth.info.last_name
+      user.birthdate = auth.info.user_birthday#.gsub('/', '-')
+      #user.city = auth.extra.raw_info.hometown
+      user.image = auth.info.image # assuming the user model has an image
+      user.nickname = auth.info.name
+      user.gender = auth.info.user_gender
+    end
   end
-end
 
 end
