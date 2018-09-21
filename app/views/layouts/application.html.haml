@@ -5,22 +5,33 @@
     = stylesheet_link_tag 'application'
     = javascript_include_tag 'application'
     = csrf_meta_tags
+    = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'                   |
+    = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
 
 %body
+  %header.navbar.navbar-fixed-top.navbar-inverse
+    %container
+      %nav
+        %ul.nav.navbar-nav.navbar-right
+          -if session[:user_id].nil?
+            %li= link_to 'Sign Up', new_user_path
+            %li= link_to 'Log In', login_path
+          -else
+            %li= link_to 'profile', profile_path
+            %li= link_to 'home', home_path
+            %li= link_to 'hikes', hikes_path
+            %li= link_to 'settings', setting_path
+            %li= link_to 'logout', logout_path
+
+
   - if flash[:notice]
     #notice.message= flash[:notice]
   - elsif flash[:warning]
     #warning.message= flash[:warning]
   #main
-    -if session[:user_id].nil?
-      =link_to 'user', login_path
-    -else
-      =link_to 'profile', profile_path
-    = link_to 'hikes', hikes_path
-    = link_to 'settings', setting_path
-    = link_to 'logout', logout_path
-
+  
     = form_tag search_path, :method => :get do
       #{text_field_tag :args, params[:args]}#{submit_tag 'Search', name: nil}
 
-    = yield
+  .container
+  = yield
