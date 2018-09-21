@@ -6,6 +6,8 @@ Rails.application.routes.draw do
     resources :comments
   end
 
+  resource :followers
+
   root :to => redirect('/users')
   get "signup", :to => "users#new"
   get "hike_preferencies_setup", :to => "users#hike_preferencies_setup"
@@ -22,6 +24,8 @@ Rails.application.routes.draw do
   post "change_password", :to => "sessions#update_password"
   get "change_email", :to => "sessions#change_email"
   post "change_email", :to => "sessions#update_email"
+
+  post "add_following", :to => "users#add_following"
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   #get 'comments/create,'
