@@ -32,3 +32,33 @@ textarea {
 .center h1 {
   margin-bottom: 10px;
 }
+
+.container-fluid{
+  display: flex; /* or inline-flex */
+  flex-direction: row;
+}
+
+.container-fluid.profile-top {
+  justify-content: center;
+}
+
+.container-fluid.profile-nickname {
+  justify-content: center;
+}
+
+
+
+.container-fluid.profile-personal-info{
+  justify-content: center;
+}
+
+
+.container-fluid.profile-bottom {
+  justify-content: center;
+}
+
+
+.col-sm{
+  flex-direction: column;
+  flex-grow: 1;
+}

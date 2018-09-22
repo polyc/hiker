@@ -1,0 +1,7 @@
+%h1 Change Nickname
+.container-fluid.change-Nickname
+  = form_tag change_nickname_path, :method => :post do
+    %p New Nickname:
+    = text_field_tag 'nickname'
+
+    = submit_tag 'Change Nickname'

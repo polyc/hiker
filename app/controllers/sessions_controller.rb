@@ -70,6 +70,18 @@ class SessionsController < ApplicationController
     redirect_to setting_path
   end
 
+  def change_nickname
+
+  end
+
+  def update_nickname
+    id = session[:user_id]
+    @user = User.find(id)
+    @user.update_attribute(:nickname, params[:nickname])
+    flash[:notice] = "Nickname was successfully changed"
+    redirect_to setting_path
+  end
+
 ##############################################################
   def logout
     session[:user_id] = nil

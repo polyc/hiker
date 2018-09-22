@@ -1,5 +1,34 @@
-= link_to "Followers", followers_user_path(@user.id)
+.container-fluid.profile-top
+  Profile Photo
 
-%br	
+.container-fluid.profile-nickname
+  %h1 #{@user.nickname}'s Profile
 
-= link_to "Following", following_user_path(@user.id)
+.container-fluid.profile-personal-info
+  .ul.personal-info
+    .li
+      Name: #{@user.name}
+    .li
+      Surname: #{@user.surname}
+    .li
+      Sex: #{@user.gender}
+    .li
+      Birth Date: #{@user.birthdate}
+    .li
+      Email: #{@user.email}
+    .li
+      City: #{@user.city}
+    .li
+      = link_to "Change Your Personal Informations"
+
+
+
+.container-fluid.profile-bottom
+  .row.new-hike-link
+    =link_to "Add new hike", new_hike_path
+    ,
+    =link_to "Change Your Hike Preferencies", hike_preferencies_setup_path
+    ,
+    = link_to "Followers List", followers_user_path(@user.id)
+    ,
+    = link_to "Following List", following_user_path(@user.id)

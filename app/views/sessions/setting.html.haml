@@ -3,10 +3,13 @@
 %ul#loginData
 
   %li
-    Email:
-    = @user.email
+    Nickname:
+    = @user.nickname
+    = link_to "Change Nickname", change_nickname_path
 
   %li
+    Email:
+    = @user.email
     = link_to "Change Email", change_email_path
 
   %li
