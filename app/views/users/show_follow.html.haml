@@ -1,0 +1,12 @@
+%h1 #{@title}
+.ul.users-follow
+  -@users.each do |u|
+    .li
+      = link_to "#{u.nickname}", user_path(u.id)
+      -if session[:user_id] != u.id
+
+        -if User.find_by(id: session[:user_id]).following?(u)
+          = link_to "unfollow", delete_following_path(u), method: :post
+
+        -else
+          = link_to "follow", add_following_path(u), method: :post

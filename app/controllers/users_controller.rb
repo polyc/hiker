@@ -16,12 +16,6 @@ class UsersController < ApplicationController
     @user = User.new
   end
 
-  def add_following
-    @user = User.find(session[:user_id])
-    @user.active_relationships.create(followed_id: params[:format].to_i)
-    redirect_to users_path
-  end
-
   def create
     @user = User.new(user_params)
     if @user.save
@@ -45,6 +39,34 @@ class UsersController < ApplicationController
     session["tmp_id"] = nil
 		flash[:notice] = "Your hike's preferencies were successfully updated"
 		redirect_to users_path
+  end
+
+  def add_following
+    @user = User.find(session[:user_id])
+    @user.active_relationships.create(followed_id: params[:format].to_i)
+    redirect_to users_path
+  end
+
+  def delete_following
+    @user = User.find(session[:user_id])
+    @user.following.delete(params[:format])
+    redirect_to users_path
+  end
+
+  def followers
+    @title = "Followers"
+    id = session[:user_id]
+    @user = User.find(id)
+    @users = @user.followers
+    render 'show_follow'
+  end
+
+  def following
+    @title = "Following"
+    id = session[:user_id]
+    @user = User.find(id)
+    @users = @user.following
+    render 'show_follow'
   end
 
   private

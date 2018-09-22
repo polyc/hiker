@@ -1,12 +1,14 @@
 Rails.application.routes.draw do
 
   # For details on the DSL available within this file, see http://guides.rubyonrails.org/routing.html
-  resources :users
+  resources :users do
+    member do
+     get :following, :followers
+   end
+  end
   resources :hikes do
     resources :comments
   end
-
-  resource :followers
 
   root :to => redirect('/users')
   get "signup", :to => "users#new"
@@ -26,6 +28,7 @@ Rails.application.routes.draw do
   post "change_email", :to => "sessions#update_email"
 
   post "add_following", :to => "users#add_following"
+  post "delete_following", :to => "users#delete_following"
 
   devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
   #get 'comments/create,'

@@ -25,7 +25,7 @@ class User < ActiveRecord::Base
   #validates :birthdate, :presence => true
   #validates :description, :length => { :in => 1..256 }
   validates :password, :confirmation => true #password_confirmation attr
-  validates_length_of :password, :in => 6..20, :on => :create
+  validates_length_of :password, presence: true, :in => 6..20, :on => :create, allow_nil: true
 
   before_save :encrypt_password
   after_save :clear_password
@@ -81,6 +81,16 @@ class User < ActiveRecord::Base
       user.nickname = auth.info.name
       user.gender = auth.info.user_gender
     end
+  end
+
+  # Unfollows a user.
+  def unfollow(other_user)
+    following.delete(other_user)
+  end
+
+  # Returns true if the current user is following the other user.
+  def following?(other_user)
+    following.include?(other_user)
   end
 
 end

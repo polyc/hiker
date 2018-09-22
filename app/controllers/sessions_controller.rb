@@ -17,6 +17,8 @@ class SessionsController < ApplicationController
     end
   end
 
+##############################################################
+
   def index
     if params[:args] != ""
       @users = User.where(nickname: params[:args])
@@ -27,14 +29,17 @@ class SessionsController < ApplicationController
     end
   end
 
+##############################################################
+
   def home
   end
-
+##############################################################
   def profile
     id = session[:user_id]
     @user = User.find(id)
   end
 
+##############################################################
   def setting
     id = session[:user_id]
     @user = User.find(id)
@@ -65,6 +70,7 @@ class SessionsController < ApplicationController
     redirect_to setting_path
   end
 
+##############################################################
   def logout
     session[:user_id] = nil
     redirect_to :action => 'login'

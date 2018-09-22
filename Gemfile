@@ -43,6 +43,9 @@ gem 'jquery-rails'
 gem 'bootstrap-sass'
 # Build JSON APIs with ease. Read more: https://github.com/rails/jbuilder
 gem 'jbuilder', '~> 2.5'
+#Use will_paginate gem for paginated views
+gem 'will_paginate'
+gem 'bootstrap-will_paginate'
 # Use Redis adapter to run Action Cable in production
 # gem 'redis', '~> 4.0'
 # Use ActiveModel has_secure_password

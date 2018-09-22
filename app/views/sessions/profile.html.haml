@@ -1,2 +1,5 @@
-<h1>Sessions#profile,</h1>
-<p>Find me in app/views/sessions/profile,.html.erb</p>
+= link_to "Followers", followers_user_path(@user.id)
+
+%br	
+
+= link_to "Following", following_user_path(@user.id)
