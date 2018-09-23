@@ -82,6 +82,14 @@ class SessionsController < ApplicationController
     redirect_to setting_path
   end
 
+  def set_profile_private
+    id = session[:user_id]
+    @user = User.find(id)
+    @user.update_attribute(:private_profile, params[:private_profile])
+    flash[:notice] = "Setting updated"
+    redirect_to setting_path
+  end
+
 ##############################################################
   def logout
     session[:user_id] = nil

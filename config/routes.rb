@@ -28,6 +28,7 @@ Rails.application.routes.draw do
   post "change_email", :to => "sessions#update_email"
   get "change_nickname", :to => "sessions#change_nickname"
   post "change_nickname", :to => "sessions#update_nickname"
+  post "set_profile_private", :to => "sessions#set_profile_private"
 
   post "add_following", :to => "users#add_following"
   post "delete_following", :to => "users#delete_following"

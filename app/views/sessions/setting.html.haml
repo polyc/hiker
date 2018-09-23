@@ -14,3 +14,11 @@
 
   %li
     = link_to "Change Password", change_password_path
+
+= form_tag set_profile_private_path, :method => :post do
+
+  Set private your profile
+  (only followers can view your personal data and content)
+  = check_box_tag 'private_profile', '1', false
+
+  = submit_tag 'Save'
