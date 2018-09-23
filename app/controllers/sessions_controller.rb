@@ -33,7 +33,7 @@ class SessionsController < ApplicationController
   def home
     id = session[:user_id]
     @user = User.find(id)
-    @hikes = Hike.all.where(user_id: @user.following.select("followed_id")).order(:created_at)
+    @hikes = Hike.all.where(user_id: @user.following.select("followed_id")).order(:created_at).reverse_order
   end
 ##############################################################
   def profile
