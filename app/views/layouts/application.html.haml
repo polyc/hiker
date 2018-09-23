@@ -23,13 +23,14 @@
             %li= link_to 'settings', setting_path
             %li= link_to 'logout', logout_path
 
+  %br
 
   - if flash[:notice]
     #notice.message= flash[:notice]
   - elsif flash[:warning]
     #warning.message= flash[:warning]
   #main
-  
+
     = form_tag search_path, :method => :get do
       #{text_field_tag :args, params[:args]}#{submit_tag 'Search', name: nil}
 
