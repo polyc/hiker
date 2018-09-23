@@ -32,8 +32,7 @@ class CommentsController < ApplicationController
       @comment.destroy
       flash[:notice] = "comment deleted"
     else
-      flash[:notice] = "Impossibile cancellare commento altrui"
-      flash[:color]  = "invalid"
+      flash[:warning] = "Impossibile cancellare commento altrui"
     end
     redirect_to hike_path(Hike.find(params[:hike_id]))
   end

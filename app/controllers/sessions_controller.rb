@@ -11,8 +11,7 @@ class SessionsController < ApplicationController
       session[:user_id] = authorized_user.id
       redirect_to users_path
     else
-      flash[:notice] = "Invalid Username or Password"
-      flash[:color]= "invalid"
+      flash[:warning] = "Invalid Username or Password"
       render "login"
     end
   end

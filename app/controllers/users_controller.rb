@@ -20,11 +20,10 @@ class UsersController < ApplicationController
     @user = User.new(user_params)
     if @user.save
       session["tmp_id"] = @user.id
-      flash[:notice] = "Signup successfull"
+      flash[:notice] = "Signed up successfully"
       redirect_to hike_preferencies_setup_path
     else
-      flash[:notice] = "Form invalid"
-      flash[:color]  = "invalid"
+      flash[:warning] = "Form invalid"
       render "new"
     end
   end
@@ -41,8 +40,7 @@ class UsersController < ApplicationController
       flash[:notice] = "#{@user.nickname} was successfully update"
 		  redirect_to profile_path
     else
-      flash[:notice] = "Form invalid"
-      flash[:color]  = "invalid"
+      flash[:warning] = "Form invalid"
     end
 
   end
