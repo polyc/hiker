@@ -1,2 +1,18 @@
-<h1>Sessions#home</h1>
-<p>Find me in app/views/sessions/home,.html.erb</p>
+.feed
+  - @hikes.each do |h|
+    .row.hike-title
+      Titolo
+
+    .row.hike-content
+      .col-md-5.hike-photo
+        Hike Photo
+      .col-md-3.hike-description
+        #{h.description}
+      .col-md-3.hike-info
+        .row.hike-info-brief
+          .ul
+            .li Type: #{h.tipo}
+            .li Rating: #{h.rating}
+            .li Distance: #{h.distance}
+        .row.hike-info
+          = link_to 'More info', hike_path(h)

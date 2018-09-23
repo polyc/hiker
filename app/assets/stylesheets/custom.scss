@@ -20,6 +20,7 @@
 body {
   padding-top: 60px;
   margin-left: 30px;
+  margin-right: 30px;
 }
 
 section {
@@ -47,6 +48,11 @@ textarea {
 
 .center h1 {
   margin-bottom: 10px;
+}
+
+.container.hikes{
+  margin-left: 10px;
+  margin-right: 10px
 }
 
 .container-fluid{
@@ -77,4 +83,61 @@ textarea {
 .col-sm{
   flex-direction: column;
   flex-grow: 1;
+}
+
+.row.hike-content{
+  display: flex;
+  justify-content: center;
+  border-color: black;
+  border-style: groove;
+  border-radius: 30px;
+  background-color: forestgreen;
+}
+.row.hike-title{
+  display: flex;
+  justify-content: center;
+  border-color: black;
+  border-style: groove;
+  //border-radius: 30px;
+  background-color: white;
+}
+
+.col-md-3{
+  display: flex;
+  flex-direction: column;
+  
+  height: 400px;
+  border-color: black;
+  border-style: groove;
+  background-color: white;
+
+}
+
+.col-md-5.hike-photo{
+  display: flex;
+  justify-content: center;
+  height: 400px;
+  border-color: black;
+  border-style: groove;
+  background-color: white;
+
+}
+
+.feed{
+ margin-left: 300px;
+ margin-right: 300px;
+}
+
+.hike-info-brief{
+
+}
+
+.row.hike-info{
+  display: flex;
+  justify-content: center;
+  height: 30px;
+  width: 300px;
+  border-style: groove;
+  border-radius: 20px;
+  background-color: silver;
 }
