@@ -1,0 +1,19 @@
+%h1 Edit your personal informations
+
+= form_tag user_path(@user), :method => :put do
+  %p Name:
+  = text_field :user, :name
+
+  %p Surname:
+  = text_field :user, :surname
+
+  %p Sex:
+  = select :user, :gender, %w(male female)
+
+  %p Birth Date:
+  = date_select :user, :birthdate
+
+  %p City:
+  = text_field :user, :city
+
+  = submit_tag 'Save'

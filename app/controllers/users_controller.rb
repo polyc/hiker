@@ -29,6 +29,26 @@ class UsersController < ApplicationController
     end
   end
 
+  def edit
+    id = params[:id]
+    @user = User.find(id)
+  end
+
+  def update
+    id = params[:id]
+    @user = User.find(id)
+    if @user.update_attributes(edit_user_params)
+      flash[:notice] = "#{@user.nickname} was successfully update"
+		  redirect_to profile_path
+    else
+      flash[:notice] = "Form invalid"
+      flash[:color]  = "invalid"
+    end
+
+  end
+
+  ##############################################################################
+
   def hike_preferencies_setup
 
   end
@@ -77,5 +97,10 @@ class UsersController < ApplicationController
   private
   def user_params
     params.require(:user).permit(:name, :surname, :gender, :birthdate, :nickname, :email, :city, :password, :password_confirmation, :hike_pref)
+  end
+
+  private
+  def edit_user_params
+    params.require(:user).permit(:name, :surname, :gender, :birthdate, :city)
   end
 end
