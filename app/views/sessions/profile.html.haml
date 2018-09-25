@@ -1,34 +1,48 @@
-.container-fluid.profile-top
-  Profile Photo
+.profile
+  .row.profile.user-content
+    .col-md-3.profile.left-buttons
+      .row.profile.follow-list-link
+        = link_to "Followers List", followers_user_path(@user.id)
+      .row.profile.follow-list-link
+        = link_to "Following List", following_user_path(@user.id)
+    .col-md-3.profile.info
+      .row.profile.user-photo
+        Profile Photo
+      .row.profile.user-name-surname
+        %h1 #{@user.name} #{@user.surname}
+      .row.profile.user-nickname
+        %h2 #{@user.nickname}
+      .row.profile.user-personal-info
+        .ul
+          .li Sex: #{@user.gender}
+          .l Birth Date: #{@user.birthdate}
+          .li Email: #{@user.email}
+          .li City: #{@user.city}
+          .li= link_to "Change Your Personal Informations", edit_user_path(@user)
+          .li=link_to "Change Your Hike Preferencies", hike_preferencies_setup_path
+    .col-md-3.profile.blank-space
 
-.container-fluid.profile-nickname
-  %h1 #{@user.nickname}'s Profile
+.profile-completed-hikes
+  .row.profile.completed-hikes
+    MY HIKES
 
-.container-fluid.profile-personal-info
-  .ul.personal-info
-    .li
-      Name: #{@user.name}
-    .li
-      Surname: #{@user.surname}
-    .li
-      Sex: #{@user.gender}
-    .li
-      Birth Date: #{@user.birthdate}
-    .li
-      Email: #{@user.email}
-    .li
-      City: #{@user.city}
-    .li
-      = link_to "Change Your Personal Informations", edit_user_path(@user)
+  - @user_hikes.each do |h|
+    .row.hike-title
+      #{h.name}
 
+    .row.profile.hike-content
+      .col-md-5.hike-photo
+        Hike Photo
+      .col-md-3.profile.hike-description
+        #{h.description}
+      .col-md-3.profile.hike-info
+        .row.hike-info-brief
+          .ul
+            .li Type: #{h.tipo}
+            .li Rating: #{h.rating}
+            .li Distance: #{h.distance}
+        .row.hike-info
+          = link_to 'More info', hike_path(h)
 
-
-.container-fluid.profile-bottom
   .row.new-hike-link
     =link_to "Add new hike", new_hike_path
-    ,
-    =link_to "Change Your Hike Preferencies", hike_preferencies_setup_path
-    ,
-    = link_to "Followers List", followers_user_path(@user.id)
-    ,
-    = link_to "Following List", following_user_path(@user.id)
