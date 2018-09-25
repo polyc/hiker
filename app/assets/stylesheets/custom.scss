@@ -240,3 +240,62 @@ textarea {
   border-radius: 20px;
   background-color: silver;
 }
+
+
+//SETTINGS
+/////////////////////////////////////////////////////////
+.settings{
+
+}
+
+.row.settings.title{
+  display: flex;
+  justify-content: center;
+}
+
+.wrapper.settings.login-data{
+  display: flex;
+  justify-content: center;
+}
+
+.row.settings.login-data{
+  display: flex;
+  background-color: white;
+  justify-content: center;
+  width: 80%;
+  border-radius: 7%;
+  border-style: groove;
+}
+
+.col-md-4.settings.login-data{
+  width:180%;
+}
+
+.ul.setting.login-data{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.li.login-data{
+  font-size: 180%;
+}
+
+.wrapper.settings.user-pref{
+  display: flex;
+  justify-content: center;
+}
+
+.row.settings.user-pref{
+  display: flex;
+  background-color: white;
+  justify-content: center;
+  width: 80%;
+  border-radius: 7%;
+  border-style: groove;
+}
+
+.col-md-4.settings.user-pref{
+  width:180%;
+  font-size: 150%;
+}
