@@ -70,8 +70,8 @@ textarea {
 //PROFILE VIEW
 ///////////////////////////////////////////////////
 .profile{
-//  margin-left: 300px;
-//  margin-right: 300px;
+  display: flex;
+  justify-content: center;
 }
 
 .col-md-3.profile{
@@ -82,17 +82,22 @@ textarea {
 }
 
 .col-md-3.profile.left-buttons{
+  display: flex;
+  align-items: center;
   justify-content: space-evenly;
+  width: 40%
+
 }
 
 .row.profile.follow-list-link{
   display: flex;
   justify-content: center;
-  height: 7%;
-  width: 55%;
+  height: 15%;
+  width: 70%;
   border-style: groove;
   border-radius: 20px;
   background-color: silver;
+  align-items: center;
 }
 
 .col-md-3.profile.info{
@@ -102,6 +107,7 @@ textarea {
   border-color: black;
   border-style: groove;
   background-color: white;
+  width: 120%
 }
 
 .row.profile.user-content{
@@ -111,6 +117,7 @@ textarea {
   border-style: groove;
   border-radius: 30px;
   background-color: forestgreen;
+  width: 70%;
 }
 .row.profile.user-photo{
 
