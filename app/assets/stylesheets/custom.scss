@@ -161,7 +161,6 @@ textarea {
 .col-md-3.profile.hike-description{
   display: flex;
   flex-direction: column;
-  height: 400px;
   border-color: black;
   border-style: groove;
   background-color: white;
@@ -170,7 +169,6 @@ textarea {
 .col-md-3.profile.hike-info{
   display: flex;
   flex-direction: column;
-  height: 400px;
   border-color: black;
   border-style: groove;
   background-color: white;
@@ -179,10 +177,10 @@ textarea {
 .col-md-5.hike-photo{
   display: flex;
   flex-direction: column;
-  height: 400px;
   border-color: black;
   border-style: groove;
   background-color: white;
+  min-height: 350px;
 }
 
 //HOME VIEW
@@ -200,6 +198,7 @@ textarea {
   border-style: groove;
   border-radius: 30px;
   background-color: forestgreen;
+  min-height: 300px;
 }
 .row.hike-title{
   display: flex;
@@ -208,12 +207,12 @@ textarea {
   border-style: groove;
   //border-radius: 30px;
   background-color: white;
+  height: 20%
 }
 
 .col-md-3.home{
   display: flex;
   flex-direction: column;
-  height: 400px;
   border-color: black;
   border-style: groove;
   background-color: white;
@@ -222,7 +221,6 @@ textarea {
 .col-md-5.hike-photo{
   display: flex;
   justify-content: center;
-  height: 400px;
   border-color: black;
   border-style: groove;
   background-color: white;
@@ -241,7 +239,7 @@ textarea {
 .row.hike-info{
   display: flex;
   justify-content: center;
-  height: 7%;
+  height: 9%;
   width: 55%;
   border-style: groove;
   border-radius: 20px;
@@ -305,4 +303,64 @@ textarea {
 .col-md-4.settings.user-pref{
   width:180%;
   font-size: 150%;
+}
+
+// SEARCH
+//////////////////////////////////////////////////////////////
+
+.search{
+}
+
+.col-md-3.search-filters{
+  display: flex;
+  width: 20%;
+  border-style: solid;
+  background-color: white;
+  flex-direction: column;
+}
+
+.row.search-filters.title{
+
+}
+
+.col-md-3.search-results{
+  display: flex;
+  width: 80%;
+  flex-direction: column;
+}
+
+
+
+.row.search.hike-info{
+  display: flex;
+  justify-content: center;
+  height: 11%;
+  width: 55%;
+  border-style: groove;
+  border-radius: 20px;
+  background-color: silver;
+}
+
+.wrapper.search-results{
+  display: flex;
+  height: 80%;
+  flex-direction: column;
+}
+
+.col-md-3.search.hike-photo{
+  display: flex;
+  flex-direction: column;
+  border-color: black;
+  border-style: groove;
+  background-color: white;
+  width: 40%
+}
+
+.row.search.hike-content{
+  display: flex;
+  justify-content: center;
+  border-color: black;
+  border-style: groove;
+  border-radius: 50;
+  background-color: forestgreen;
 }
