@@ -1,24 +1,32 @@
-%h1 Settings
+.settings
+  .row.settings.title
+    .h1 SETTINGS
+  .wrapper.settings.login-data
+    .row.settings.login-data
+      .col-md-4.settings.login-data
+        .ul.setting.login-data
+          .li.login-data
+            Nickname
+            = @user.nickname
+            = link_to "Change Nickname", change_nickname_path
+          .li.login-data
+            Email:
+            = @user.email
+            = link_to "Change Email", change_email_path
+          .li.login-data
+            = link_to "Change Password", change_password_path
 
-%ul#loginData
+  .wrapper.settings.user-pref
+    .row.settings.user-pref
+      .col-md-4.settings.user-pref
 
-  %li
-    Nickname:
-    = @user.nickname
-    = link_to "Change Nickname", change_nickname_path
+        = form_tag set_profile_private_path, :method => :post do
 
-  %li
-    Email:
-    = @user.email
-    = link_to "Change Email", change_email_path
+          Set private your profile
+          (only followers can view your personal data and content)
+          -if @user.private_profile
+            = check_box_tag 'private_profile', '1', true
+          -else
+            = check_box_tag 'private_profile', '1', false
 
-  %li
-    = link_to "Change Password", change_password_path
-
-= form_tag set_profile_private_path, :method => :post do
-
-  Set private your profile
-  (only followers can view your personal data and content)
-  = check_box_tag 'private_profile', '1', false
-
-  = submit_tag 'Save'
+          = submit_tag 'Save'

@@ -1,28 +1,35 @@
-%h1 Search results
+.search
+  .col-md-3.search-filters
+    .row.search-filters.title
+      .h2 Filters
+    .row.search-filters.search-bar
+      SEARCHBAR
+    .row.search-filters.filters
+      .ul.search-filters
+        .li.search-filters
+          UTENTE
+          .ul.search-filters.sub-filters
+            .li.search-filters
+            CITTA
+        .li.search-filters
+          HIKE
 
-%h4 Hikes
-%table#hikes
-  %thead
-    %tr
-      %th
-
-  %tbody
+  .col-md-3.search-results
     - @hikes.each do |h|
-      %tr
-        %td= link_to "#{h.name}", hike_path(h)
+      .wrapper.search-results
+        .row.hike-title
+          #{h.name}
 
-%p Doesn't found the hike you were looking for?
-= link_to "Add it yourself!", new_hike_path
-
-
-
-%h4 Users
-%table#users
-  %thead
-    %tr
-      %th
-
-  %tbody
-    - @users.each do |u|
-      %tr
-        %td= link_to "#{u.nickname}", user_path(u)
+        .row.search.hike-content
+          .col-md-3.search.hike-photo
+            Hike Photo
+          .col-md-3.home.hike-description
+            #{h.description}
+          .col-md-3.home.hike-info
+            .row.hike-info-brief
+              .ul
+                .li Type: #{h.tipo}
+                .li Rating: #{h.rating}
+                .li Distance: #{h.distance}
+            .row.search.hike-info
+              = link_to 'More info', hike_path(h)

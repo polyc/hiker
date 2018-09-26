@@ -39,6 +39,7 @@ class SessionsController < ApplicationController
   def profile
     id = session[:user_id]
     @user = User.find(id)
+    @user_hikes = Hike.all.where(user_id:@user.id)
   end
 
 ##############################################################

@@ -21,6 +21,7 @@ body {
   padding-top: 60px;
   margin-left: 30px;
   margin-right: 30px;
+  background-color: silver;
 }
 
 section {
@@ -66,29 +67,128 @@ textarea {
   flex-direction: row;
 }
 
-.container-fluid.profile-top {
+//PROFILE VIEW
+///////////////////////////////////////////////////
+.profile{
+  display: flex;
   justify-content: center;
 }
 
-.container-fluid.profile-nickname {
-  justify-content: center;
-}
-
-
-
-.container-fluid.profile-personal-info{
-  justify-content: center;
-}
-
-
-.container-fluid.profile-bottom {
-  justify-content: center;
-}
-
-
-.col-sm{
+.col-md-3.profile{
+  display: flex;
+  margin-left: 0;
+  margin-right: 0;
   flex-direction: column;
-  flex-grow: 1;
+}
+
+.col-md-3.profile.left-buttons{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
+  width: 40%
+
+}
+
+.row.profile.follow-list-link{
+  display: flex;
+  justify-content: center;
+  height: 15%;
+  width: 70%;
+  border-style: groove;
+  border-radius: 20px;
+  background-color: silver;
+  align-items: center;
+}
+
+.col-md-3.profile.info{
+  display: flex;
+  flex-direction: column;
+  height: 400px;
+  border-color: black;
+  border-style: groove;
+  background-color: white;
+  width: 120%
+}
+
+.row.profile.user-content{
+  display: flex;
+  justify-content: center;
+  border-color: black;
+  border-style: groove;
+  border-radius: 30px;
+  background-color: forestgreen;
+  width: 70%;
+}
+.row.profile.user-photo{
+
+}
+
+.row.profile.user-personal-info{
+
+}
+
+.row.profile.user-name-surname{
+
+}
+
+.row.profile.user-personal-info{
+
+}
+
+.ul.profile.user-personal-info{
+  display: flex;
+  justify-content: center;
+  flex-direction: column;
+}
+.ul.profile.user-personal-info{
+  display: flex;
+  justify-content: center;
+}
+
+.profile-completed-hikes{
+
+}
+
+.row.profile.hike-content{
+  display: flex;
+  justify-content: center;
+  border-color: black;
+  border-style: groove;
+  border-radius: 30px;
+  background-color: forestgreen;
+}
+
+.col-md-3.profile.hike-description{
+  display: flex;
+  flex-direction: column;
+  border-color: black;
+  border-style: groove;
+  background-color: white;
+}
+
+.col-md-3.profile.hike-info{
+  display: flex;
+  flex-direction: column;
+  border-color: black;
+  border-style: groove;
+  background-color: white;
+}
+
+.col-md-5.hike-photo{
+  display: flex;
+  flex-direction: column;
+  border-color: black;
+  border-style: groove;
+  background-color: white;
+  min-height: 350px;
+}
+
+//HOME VIEW
+//////////////////////////////////////////////////
+
+.feed{
+ //margin-left: 300px;
+ //margin-right: 300px;
 }
 
 .row.hike-content{
@@ -98,6 +198,7 @@ textarea {
   border-style: groove;
   border-radius: 30px;
   background-color: forestgreen;
+  min-height: 300px;
 }
 .row.hike-title{
   display: flex;
@@ -106,32 +207,24 @@ textarea {
   border-style: groove;
   //border-radius: 30px;
   background-color: white;
+  height: 20%
 }
 
-.col-md-3{
+.col-md-3.home{
   display: flex;
   flex-direction: column;
-
-  height: 400px;
   border-color: black;
   border-style: groove;
   background-color: white;
-
 }
 
 .col-md-5.hike-photo{
   display: flex;
   justify-content: center;
-  height: 400px;
   border-color: black;
   border-style: groove;
   background-color: white;
 
-}
-
-.feed{
- margin-left: 300px;
- margin-right: 300px;
 }
 
 .hike-info-brief{
@@ -139,15 +232,135 @@ textarea {
 }
 
 .row.hike-title{
-  background-color: silver;
+  background-color: black;
+  color: white;
 }
 
 .row.hike-info{
   display: flex;
   justify-content: center;
-  height: 30px;
-  width: 300px;
+  height: 9%;
+  width: 55%;
   border-style: groove;
   border-radius: 20px;
   background-color: silver;
+}
+
+
+//SETTINGS
+/////////////////////////////////////////////////////////
+.settings{
+
+}
+
+.row.settings.title{
+  display: flex;
+  justify-content: center;
+}
+
+.wrapper.settings.login-data{
+  display: flex;
+  justify-content: center;
+}
+
+.row.settings.login-data{
+  display: flex;
+  background-color: white;
+  justify-content: center;
+  width: 80%;
+  border-radius: 7%;
+  border-style: groove;
+}
+
+.col-md-4.settings.login-data{
+  width:180%;
+}
+
+.ul.setting.login-data{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.li.login-data{
+  font-size: 180%;
+}
+
+.wrapper.settings.user-pref{
+  display: flex;
+  justify-content: center;
+}
+
+.row.settings.user-pref{
+  display: flex;
+  background-color: white;
+  justify-content: center;
+  width: 80%;
+  border-radius: 7%;
+  border-style: groove;
+}
+
+.col-md-4.settings.user-pref{
+  width:180%;
+  font-size: 150%;
+}
+
+// SEARCH
+//////////////////////////////////////////////////////////////
+
+.search{
+}
+
+.col-md-3.search-filters{
+  display: flex;
+  width: 20%;
+  border-style: solid;
+  background-color: white;
+  flex-direction: column;
+}
+
+.row.search-filters.title{
+
+}
+
+.col-md-3.search-results{
+  display: flex;
+  width: 80%;
+  flex-direction: column;
+}
+
+
+
+.row.search.hike-info{
+  display: flex;
+  justify-content: center;
+  height: 11%;
+  width: 55%;
+  border-style: groove;
+  border-radius: 20px;
+  background-color: silver;
+}
+
+.wrapper.search-results{
+  display: flex;
+  height: 80%;
+  flex-direction: column;
+}
+
+.col-md-3.search.hike-photo{
+  display: flex;
+  flex-direction: column;
+  border-color: black;
+  border-style: groove;
+  background-color: white;
+  width: 40%
+}
+
+.row.search.hike-content{
+  display: flex;
+  justify-content: center;
+  border-color: black;
+  border-style: groove;
+  border-radius: 50;
+  background-color: forestgreen;
 }
