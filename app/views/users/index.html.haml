@@ -12,7 +12,7 @@
       %th E-mail
       %th Description
       %th City
-      %th
+      %th Picture
   %tbody
     - @users.each_with_index do |u, idx|
       %tr
@@ -25,5 +25,6 @@
         %td= u.email
         %td= u.description
         %td= u.city
-
+        %td= image_tag u.image.url if u.image?
+        = debug(u)
   = link_to 'add user', new_user_path
