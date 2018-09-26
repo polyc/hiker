@@ -32,6 +32,11 @@ gem 'geocoder'
 gem 'gmaps4rails'
 #Use polyline to draw path on gmaps
 gem 'polylines'
+#Use mini_magick and carrierwave for image upload
+gem 'mini_magick'
+gem 'carrierwave'
+
+
 
 # Use CoffeeScript for .coffee assets and views
 gem 'coffee-rails', '~> 4.2'
