@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   validates_length_of :password, presence: true, :in => 6..20, :on => :create, allow_nil: true
   validate :image_size
 
-  before_save :encrypt_password#, :save_image
+  before_save :encrypt_password
   after_save :clear_password
 
 

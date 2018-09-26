@@ -25,6 +25,16 @@
         %td= u.email
         %td= u.description
         %td= u.city
-        %td= image_tag u.image.url if u.image?
-        = debug(u)
+        %td.image-wrapper= image_tag u.image.url,:class=> "img-circular" if u.image?
+  :css
+    .img-circular{
+      width: 100px;
+      height: 100px;
+      background-size: cover;
+      display: block;
+      border-radius: 50px;
+      -webkit-border-radius: 50px;
+      -moz-border-radius: 50px;
+    }
+
   = link_to 'add user', new_user_path

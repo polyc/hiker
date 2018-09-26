@@ -15,6 +15,7 @@
       %th Type
       %th Nature
       %th Equipment
+      %th
 
   %tbody
     - @hikes.each_with_index do |h, idx|
@@ -31,8 +32,19 @@
         %td= h.tipo
         %td= h.nature
         %td= h.equipment
+        %td.image-wrapper= image_tag h.hike_image.url,:class=> "img-circular" if h.hike_image?
+  :css
+    .img-circular{
+      width: 150px;s
+      height: 150px;
+      background-size: cover;
+      display: block;
+      border-radius: 75px;
+      -webkit-border-radius: 750px;
+      -moz-border-radius: 75px;
+    }
+
+
   = link_to 'add_hike', new_hike_path
-  %br
-  = link_to 'hikes', hikes_path
   %br
   = link_to 'users', users_path
