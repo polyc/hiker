@@ -18,7 +18,6 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
-    #@user.image = user_params[:image]
     if @user.save
       session["tmp_id"] = @user.id
       flash[:notice] = "Signed up successfully"

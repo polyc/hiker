@@ -10,6 +10,8 @@ class Hike < ActiveRecord::Base
   def self.all_types ; %w[ T E EE EEA EAI ] ; end
   def self.all_difficulty ; %w[ P, I, E ] ; end
 
+  mount_uploader :hike_image, ImageUploader
+
   attr_accessor :filename
 
   FILENAME_REGEX = /\.gpx$/i
@@ -20,9 +22,18 @@ class Hike < ActiveRecord::Base
   #validates :nature, :length => { :in 0..128 }
   validates :rating, :presence => true, :inclusion => 0..5
   validates :tipo, :presence => true, :inclusion =>  { :in => %w( T E EE EEA EAI ) }
+  validate :image_size
 
-  before_save :parse_gpx
+  before_save :parse_gpx, :image_size
   after_save :destroy_gpxfile
+
+
+  # Validates the size of an uploaded picture.
+  def image_size
+    if hike_image.size > 5.megabytes
+      errors.add(:hike_image, "should be less than 5MB")
+    end
+  end
 
   def parse_gpx
     r = Array.new
