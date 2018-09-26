@@ -23,7 +23,7 @@ class User < ActiveRecord::Base
   validates :name, :presence => true, :length => { :in => 3..20 }
   validates :surname, :presence => true, :length => { :in => 3..20 }
   validates :nickname, :presence => true, :length => { :in => 3..20 }
-  validates :gender, :presence => true, :inclusion => { :in => %w(male female)}
+  validates :gender, :presence => true, :inclusion => { :in => %w(male female not-specified)}
   #validates :email, :presence => true, :uniqueness => true, :format => EMAIL_REGEX
   #validates :birthdate, :presence => true
   #validates :description, :length => { :in => 1..256 }
@@ -87,11 +87,9 @@ class User < ActiveRecord::Base
       user.password = Devise.friendly_token[0,20]
       user.name = auth.info.first_name   # assuming the user model has a name
       user.surname = auth.info.last_name
-      user.birthdate = auth.info.user_birthday#.gsub('/', '-')
-      #user.city = auth.extra.raw_info.hometown
       user.image = auth.info.image # assuming the user model has an image
       user.nickname = auth.info.name
-      user.gender = auth.info.user_gender
+      user.gender = "not-specified"
     end
   end
 
