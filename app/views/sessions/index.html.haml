@@ -2,34 +2,52 @@
   .col-md-3.search-filters
     .row.search-filters.title
       .h2 Filters
-    .row.search-filters.search-bar
-      SEARCHBAR
-    .row.search-filters.filters
-      .ul.search-filters
-        .li.search-filters
-          UTENTE
-          .ul.search-filters.sub-filters
-            .li.search-filters
-            CITTA
-        .li.search-filters
-          HIKE
+    = form_tag search_path, :method => :get do
+      .row.search-filters.search-bar
+        #{text_field_tag :args, params[:args]}#{submit_tag 'Search', name: nil}
+      .row.search-filters.filters
+        .ul.search-filters
+          .li.search-filters
+            UTENTE
+            = check_box_tag 'filters[]', 'U', false
+            .ul.search-filters.sub-filters
+              .li.search-filters
+              CITTA
+              = text_field_tag :city, params[:city]
+              = check_box_tag 'filters[]', 'C', false
+          .li.search-filters
+            HIKE
+            = check_box_tag 'filters[]', 'H', false
 
   .col-md-3.search-results
-    - @hikes.each do |h|
-      .wrapper.search-results
-        .row.hike-title
-          #{h.name}
+    -if @hikes != nil
+      - @hikes.each do |h|
+        .wrapper.search-results
+          .row.hike-title
+            #{h.name}
 
-        .row.search.hike-content
-          .col-md-3.search.hike-photo
-            Hike Photo
-          .col-md-3.home.hike-description
-            #{h.description}
-          .col-md-3.home.hike-info
-            .row.hike-info-brief
-              .ul
-                .li Type: #{h.tipo}
-                .li Rating: #{h.rating}
-                .li Distance: #{h.distance}
-            .row.search.hike-info
-              = link_to 'More info', hike_path(h)
+          .row.search.hike-content
+            .col-md-3.search.hike-photo
+              Hike Photo
+            .col-md-3.home.hike-description
+              #{h.description}
+            .col-md-3.home.hike-info
+              .row.hike-info-brief
+                .ul
+                  .li Type: #{h.tipo}
+                  .li Rating: #{h.rating}
+                  .li Distance: #{h.distance}
+              .row.search.hike-info
+                = link_to 'More info', hike_path(h)
+
+    %h4 Users
+    %table#users
+      %thead
+        %tr
+          %th
+
+      %tbody
+        -if @users != nil
+          - @users.each do |u|
+            %tr
+              %td= link_to "#{u.nickname}", user_path(u)

@@ -19,12 +19,29 @@ class SessionsController < ApplicationController
 ##############################################################
 
   def index
-    if params[:args] != ""
-      @users = User.where(nickname: params[:args])
-      @hikes = Hike.where(name: params[:args])
+    if params[:filters] != nil
+      if params[:filters].include?('H')
+        if params[:args] != ""
+          @hikes = Hike.where(name: params[:args])
+        else
+          @hikes = Hike.all
+        end
+      elsif params[:filters].include?('U')
+        if params[:filters].include?('C')
+          if params[:args] != ""
+            @users = User.where(nickname: params[:args], city: params[:city])
+          else
+            @users = User.where(city: params[:city])
+          end
+        elsif params[:args] != ""
+          @users = User.where(nickname: params[:args])
+        else
+          @users = User.all
+        end
+      end
     else
-      @users = User.all
       @hikes = Hike.all
+      @users = User.all
     end
   end
 
