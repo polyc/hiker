@@ -59,6 +59,30 @@ class SessionsController < ApplicationController
     @user_hikes = Hike.all.where(user_id:@user.id)
   end
 
+  def add_hike_to_favorites
+    @user = User.find(session[:user_id])
+    @hike = Hike.find(params[:format])
+    association = @user.favorites.new(favoritable: @hike)
+    if association.save
+      flash[:notice] = "Successfully added to my favorite hikes"
+    else
+      flash[:warning] = "cannot add to my favorite hikes"
+    end
+    redirect_to hike_path(@hike)
+  end
+
+  def remove_hike_from_favorites
+    @user = User.find(session[:user_id])
+    @to_delete = Favorite.where(user_id: @user.id, favoritable_id: params[:format])
+
+    if Favorite.destroy(@to_delete.ids)
+      flash[:notice] = "Successfully removed from favorites"
+    else
+      flash[:warning] = "cannot remove it from favorites"
+    end
+    redirect_to hike_path(params[:format])
+  end
+
 ##############################################################
   def setting
     id = session[:user_id]

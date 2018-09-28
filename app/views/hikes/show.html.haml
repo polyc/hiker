@@ -56,4 +56,11 @@
 = link_to 'create comment', new_hike_comment_path(@hike)
 
 %br
+= debug(@user.favorites)
+-if @favorite.nil? || @favorite.empty?
+  = link_to 'Aggiungi ai preferiti', add_hike_to_favorites_path(@hike), method: :post
+-else
+  = link_to 'Rimuovi dai preferiti', remove_hike_from_favorites_path(@hike), method: :post
+%br
+
 = link_to 'users', users_path

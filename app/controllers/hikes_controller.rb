@@ -13,6 +13,8 @@ class HikesController < ApplicationController
   def show
     id = params[:id]
     @hike = Hike.find(id)
+    @user = User.find(session[:user_id])
+    @favorite = Favorite.where(user_id: @user.id, favoritable_id: @hike.id)
   end
 
   def create

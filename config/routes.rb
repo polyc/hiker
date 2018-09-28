@@ -29,6 +29,8 @@ Rails.application.routes.draw do
   get "change_nickname", :to => "sessions#change_nickname"
   post "change_nickname", :to => "sessions#update_nickname"
   post "set_profile_private", :to => "sessions#set_profile_private"
+  post "add_hike_to_favorites", :to => "sessions#add_hike_to_favorites"
+  post "remove_hike_from_favorites", :to => "sessions#remove_hike_from_favorites"
 
   post "add_following", :to => "users#add_following"
   post "delete_following", :to => "users#delete_following"
