@@ -1,46 +1,55 @@
 %h1 #{@user.nickname}
 
--if session[:user_id] != @user.id
+-if @user.banned?(User.find(session[:user_id])) == false
 
-  -if User.find_by(id: session[:user_id]).following?(@user)
-    %td= link_to "unfollow", delete_following_path(@user), method: :post
+  -if session[:user_id] != @user.id
 
-  -else
-    %td= link_to "follow", add_following_path(@user), method: :post
+    -if User.find_by(id: session[:user_id]).following?(@user)
+      %td= link_to "unfollow", delete_following_path(@user), method: :post
 
--if (@user.id == session[:user_id]) || (@user.private_profile.nil?) || (User.find(session[:user_id]).following?(@user))
-  %table#hikes
-    %thead
-      %tr
-        %th Title
-        %th Difficulty
-        %th Distance
-        %th Time
-        %th Max height
-        %th Min height
-        %th Level difference
-        %th Rating
-        %th Type
-        %th Nature
-        %th Equipment
-        %th
+    -else
+      %td= link_to "follow", add_following_path(@user), method: :post
 
-    %tbody
-      - Hike.where(user_id: @user.id).each do |h|
+  -if (@user.id == session[:user_id]) || (@user.private_profile.nil?) || (User.find(session[:user_id]).following?(@user))
+    %table#hikes
+      %thead
         %tr
-          %td= link_to "#{h.name}", hike_path(h)
-          %td= h.difficulty
-          %td= h.distance
-          %td= h.avg_time
-          %td= h.max_height
-          %td= h.min_height
-          %td= h.level_difference
-          %td= h.rating
-          %td= h.tipo
-          %td= h.nature
-          %td= h.equipment
+          %th Title
+          %th Difficulty
+          %th Distance
+          %th Time
+          %th Max height
+          %th Min height
+          %th Level difference
+          %th Rating
+          %th Type
+          %th Nature
+          %th Equipment
+          %th
+
+      %tbody
+        - Hike.where(user_id: @user.id).each do |h|
+          %tr
+            %td= link_to "#{h.name}", hike_path(h)
+            %td= h.difficulty
+            %td= h.distance
+            %td= h.avg_time
+            %td= h.max_height
+            %td= h.min_height
+            %td= h.level_difference
+            %td= h.rating
+            %td= h.tipo
+            %td= h.nature
+            %td= h.equipment
 
 %br
 = link_to 'hikes', hikes_path
 %br
 = link_to 'users', users_path
+%br
+
+-if session[:user_id] != @user.id
+  -if User.find(session[:user_id]).banned?(@user)
+    = link_to 'unban user', remove_from_banned_users_path(@user), method: :post
+  -else
+    = link_to 'ban user', add_to_banned_users_path(@user), method: :post

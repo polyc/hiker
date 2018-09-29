@@ -45,6 +45,7 @@ class UsersController < ApplicationController
 
   end
 
+  #USER HIKE PREFERENCIES METHODS
   ##############################################################################
 
   def hike_preferencies_setup
@@ -59,10 +60,13 @@ class UsersController < ApplicationController
       @user = User.find(session[:user_id])
     end
 
-    @user.update_attribute(:hike_pref, params[:hike_pref])
+    @user.update_attribute(:hike_pref, params[:hike_pref].to_s)
     flash[:notice] = "Your hike's preferencies were successfully updated"
 		redirect_to users_path
   end
+
+  #FOLLOW ACTIONS
+  ##############################################################################
 
   def add_following
     @user = User.find(session[:user_id])
@@ -92,6 +96,33 @@ class UsersController < ApplicationController
     render 'show_follow'
   end
 
+  #BAN ACTIONS
+  ##############################################################################
+
+  def add_to_banned_users
+    @user = User.find(session[:user_id])
+    @banned = User.find(params[:format])
+    @user.active_ban_relationships.create(banned_id: params[:format].to_i)
+
+    if @user.following?(@banned)
+      @user.unfollow(@banned)
+    end
+    if @banned.following?(@user)
+      @banned.unfollow(@user)
+    end
+
+    redirect_to user_path(@banned)
+  end
+
+  def remove_from_banned_users
+    @user = User.find(session[:user_id])
+    @banned = User.find(params[:format])
+    @user.unban(User.find(params[:format]))
+    redirect_to user_path(@banned)
+  end
+
+  #PRIVATE METHODS
+  ##############################################################################
   private
   def user_params
     params.require(:user).permit(:name, :surname, :gender, :birthdate, :nickname, :email, :city, :password, :password_confirmation, :image, :hike_pref)

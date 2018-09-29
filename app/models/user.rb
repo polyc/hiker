@@ -7,9 +7,18 @@ class User < ActiveRecord::Base
   has_many :following, through: :active_relationships, source: :followed
 
   has_many :passive_relationships, class_name:  "Relationship", foreign_key: "followed_id", dependent:   :destroy
-  has_many :followers, through: :passive_relationships, source: :follower
+  has_many :followers, through: :passive_relationships
 
   has_many :favorites, inverse_of: :user
+
+  has_many :active_ban_relationships, class_name: "Ban", foreign_key: "condemner_id", dependent: :destroy
+  has_many :condemning, through: :active_ban_relationships, source: :banned
+
+  has_many :passive_ban_relationships, class_name: "Ban", foreign_key: "banned_id", dependent: :destroy
+  has_many :condemners, through: :passive_ban_relationships
+
+
+
 
 
   devise :omniauthable, omniauth_providers: %i[facebook]
@@ -101,6 +110,14 @@ class User < ActiveRecord::Base
   # Returns true if the current user is following the other user.
   def following?(other_user)
     following.include?(other_user)
+  end
+
+  def banned?(other_user)
+    condemning.include?(other_user)
+  end
+
+  def unban(other_user)
+    condemning.delete(other_user)
   end
 
 end

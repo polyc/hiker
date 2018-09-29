@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   get "signup", :to => "users#new"
   get "hike_preferencies_setup", :to => "users#hike_preferencies_setup"
   put "hike_preferencies_setup", :to => "users#hike_preferencies_update"
+  post "add_to_banned_users", :to => "users#add_to_banned_users"
+  post "remove_from_banned_users", :to => "users#remove_from_banned_users"
 
   get "login", :to => "sessions#login"
   get "logout", :to => "sessions#logout"

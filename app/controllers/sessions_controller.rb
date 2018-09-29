@@ -1,4 +1,5 @@
 class SessionsController < ApplicationController
+  ######DA CONTROLLARE LE AZIONI POSSIBILI QUANDO NON SI E AUTENTICATI
   before_action :authenticate_user, :only => [:home, :profile, :setting, :search, :change_email, :update_email, :change_password, :update_password]
   before_action :save_login_state, :only => [:login, :login_attempt]
 
@@ -19,13 +20,25 @@ class SessionsController < ApplicationController
 ##############################################################
 
   def index
+    @user = User.find(session[:user_id])
+    params[:condemners] = @user.condemners.ids
+
     if params[:filters] != nil
+
       if params[:filters].include?('H')
         if params[:args] != ""
-          @hikes = Hike.where(name: params[:args])
-        else
+          if (params[:condemners].nil? || params[:condemners].empty?)
+            @hikes = Hike.where(name: params[:args])
+          else
+            @hikes = Hike.where.not("user_id = ?", params[:condemners]).where(name: params[:args])
+          end
+        elsif (params[:condemners].nil? || params[:condemners].empty?)
           @hikes = Hike.all
+        else
+          @hikes = Hike.where.not("user_id = ?", params[:condemners])
         end
+
+
       elsif params[:filters].include?('U')
         if params[:filters].include?('C')
           if params[:args] != ""
@@ -39,8 +52,14 @@ class SessionsController < ApplicationController
           @users = User.all
         end
       end
+
+
     else
-      @hikes = Hike.all
+      if (params[:condemners].nil? || params[:condemners].empty?)
+        @hikes = Hike.all
+      else
+        @hikes = Hike.where.not("user_id = ?", params[:condemners])
+      end
       @users = User.all
     end
   end
