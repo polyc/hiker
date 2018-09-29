@@ -512,3 +512,53 @@ textarea {
   align-content: space-between;
   //width: 70%;
 }
+
+//CHANGE NICKNAME FORM
+////////////////////////////////////////////////////////////////////////////////
+
+.change-nickname{
+
+}
+
+.row.change-nickname.title{
+  display: flex;
+  justify-content: center;
+}
+
+.wrapper.change-nickname{
+  display: flex;
+  justify-content: center;
+  align-content: space-around;
+}
+
+.row.change-nickname.data{
+  display: flex;
+  background-color: white;
+  justify-content: center;
+  width: 35%;
+  border-radius: 40px;
+  border-style: solid;
+  border-color: forestgreen;
+  border-width: thick;
+  align-content: space-around;
+  min-height: 60px;
+}
+
+.col-md-4.change-nickname{
+  width:180%;
+  min-height: 60px;
+}
+
+.ul.change-nickname{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  min-height: 150px;
+}
+
+.li.change-nickname{
+  display: flex;
+  font-size: 170%;
+  justify-content: center;
+  //width: 70%;
+}
