@@ -28,39 +28,39 @@ class SessionsController < ApplicationController
       if params[:filters].include?('H')
         if params[:args] != ""
           if (params[:condemners].nil? || params[:condemners].empty?)
-            @hikes = Hike.where(name: params[:args])
+            @hikes = pag(Hike.where(name: params[:args]))
           else
-            @hikes = Hike.where.not("user_id = ?", params[:condemners]).where(name: params[:args])
+            @hikes = pag(Hike.where.not("user_id = ?", params[:condemners]).where(name: params[:args]))
           end
         elsif (params[:condemners].nil? || params[:condemners].empty?)
-          @hikes = Hike.all
+          @hikes = pag(Hike.all)
         else
-          @hikes = Hike.where.not("user_id = ?", params[:condemners])
+          @hikes = pag(Hike.where.not("user_id = ?", params[:condemners]))
         end
 
 
       elsif params[:filters].include?('U')
         if params[:filters].include?('C')
           if params[:args] != ""
-            @users = User.where(nickname: params[:args], city: params[:city])
+            @users = pag(User.where(nickname: params[:args], city: params[:city]))
           else
-            @users = User.where(city: params[:city])
+            @users = pag(User.where(city: params[:city]))
           end
         elsif params[:args] != ""
-          @users = User.where(nickname: params[:args])
+          @users = pag(User.where(nickname: params[:args]))
         else
-          @users = User.all
+          @users = pag(User.all)
         end
       end
 
 
     else
       if (params[:condemners].nil? || params[:condemners].empty?)
-        @hikes = Hike.all
+        @hikes = pag(Hike.all)
       else
-        @hikes = Hike.where.not("user_id = ?", params[:condemners])
+        @hikes = pag(Hike.where.not("user_id = ?", params[:condemners]))
       end
-      @users = User.all
+      @users = pag(User.all)
     end
   end
 
@@ -69,13 +69,13 @@ class SessionsController < ApplicationController
   def home
     id = session[:user_id]
     @user = User.find(id)
-    @hikes = Hike.all.where(user_id: @user.following.select("followed_id")).order(:created_at).reverse_order
+    @hikes = pag(Hike.all.where(user_id: @user.following.select("followed_id")).order(:created_at).reverse_order)
   end
 ##############################################################
   def profile
     id = session[:user_id]
     @user = User.find(id)
-    @user_hikes = Hike.all.where(user_id:@user.id)
+    @user_hikes = pag(Hike.all.where(user_id:@user.id))
   end
 
   def add_hike_to_favorites
@@ -157,6 +157,11 @@ class SessionsController < ApplicationController
   def logout
     session[:user_id] = nil
     redirect_to :action => 'login'
+  end
+
+  private
+  def pag(obj)
+    obj.paginate(:page => params[:page], :per_page => 5)
   end
 
 end

@@ -40,6 +40,8 @@
               .row.search.hike-info
                 = link_to 'More info', hike_path(h)
 
+    = will_paginate @hikes
+
     %h4 Users table
     %table#users
       %thead
@@ -51,3 +53,5 @@
           - @users.each do |u|
             %tr
               %td= link_to "#{u.nickname}", user_path(u)
+
+    = will_paginate @users
