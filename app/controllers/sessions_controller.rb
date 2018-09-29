@@ -115,10 +115,15 @@ class SessionsController < ApplicationController
   def update_password
     id = session[:user_id]
     @user = User.find(id)
-    @user.password = params[:password]
-    @user.save
-    flash[:notice] = "Password was successfully changed"
-    redirect_to setting_path
+    if @user.match_password(params[:current_password]) && params[:new_password] == params[:password_confirmation]
+      @user.password = params[:new_password]
+      @user.save
+      flash[:notice] = "Password was successfully changed"
+      redirect_to setting_path
+    else
+      flash[:warning] = "current password wrong or new password differs from confirmation password"
+      redirect_to change_password_path
+    end
   end
 
   def change_email
