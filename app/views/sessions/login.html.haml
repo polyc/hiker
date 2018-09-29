@@ -1,13 +1,18 @@
-- @page_title = "UserAuth | Login"
-.Sign_Form
-  %h1 Log in
-  = form_tag(:action => 'login_attempt') do
-    %p
-      Username or Email: #{text_field_tag(:username_or_email)}
-    %p
-      Password: #{password_field_tag :login_password}
-    = submit_tag("Log In")
-
-  = link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path
-  %br
-  = link_to "Register", new_user_path
+.login
+  .row.login.title
+    .h1 LOGIN HIKER
+  .wrapper.login.login-data
+    .row.login.login-data
+      .col-md-4.login.login-data
+        = form_tag(:action => 'login_attempt') do
+          .ul.login.login-data
+            .li.login.login-data
+              Username or Email
+              #{text_field_tag(:username_or_email)}
+            .li.login.login-data
+              Password
+              #{password_field_tag (:login_password)}
+            .li.login.login-data
+              = submit_tag("Log In")
+            .li.login.login-data
+              = link_to "Sign in with Facebook", user_facebook_omniauth_authorize_path

@@ -268,7 +268,7 @@ textarea {
   background-color: white;
   justify-content: center;
   width: 80%;
-  border-radius: 7%;
+  border-radius: 40px;
   border-style: groove;
 }
 
@@ -296,7 +296,7 @@ textarea {
   background-color: white;
   justify-content: center;
   width: 80%;
-  border-radius: 7%;
+  border-radius: 40px;
   border-style: groove;
 }
 
@@ -363,4 +363,53 @@ textarea {
   border-style: groove;
   border-radius: 50;
   background-color: forestgreen;
+}
+
+//LOGIN
+////////////////////////////////////////////////////////////////////////////////
+.login{
+
+}
+
+.row.login.title{
+  display: flex;
+  justify-content: center;
+}
+
+.wrapper.login.login-data{
+  display: flex;
+  justify-content: center;
+  align-content: space-around;
+}
+
+.row.login.login-data{
+  display: flex;
+  background-color: white;
+  justify-content: center;
+  width: 35%;
+  border-radius: 40px;
+  border-style: solid;
+  border-color: forestgreen;
+  border-width: thick;
+  align-content: space-around;
+  min-height: 300px;
+}
+
+.col-md-4.login.login-data{
+  width:180%;
+  min-height: 300px;
+}
+
+.ul.login.login-data{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  min-height: 300px;
+}
+
+.li.login.login-data{
+  display: flex;
+  //font-size: 170%;
+  justify-content: center;
+  //width: 70%;
 }
