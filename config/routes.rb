@@ -15,6 +15,9 @@ Rails.application.routes.draw do
   get "hike_preferencies_setup", :to => "users#hike_preferencies_setup"
   put "hike_preferencies_setup", :to => "users#hike_preferencies_update"
 
+  get "hike_photo", :to => "hikes#upload_hike_photo_setup"
+  put "hike_photo", :to => "hikes#upload_hike_photo_update"
+
   get "login", :to => "sessions#login"
   get "logout", :to => "sessions#logout"
   get "home", :to => "sessions#home"

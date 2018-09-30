@@ -1,0 +1,17 @@
+
+%h1 Upload Hike Photo
+= form_tag hike_photo_path, :mulitpart => true, :method => :put do
+
+  %p Hike image
+  = file_field :hike, :hike_image, accept: 'image/jpeg,image/gif,image/png'
+
+  :javascript
+    $('#hike_picture').bind('change', function() {
+      var size_in_megabytes = this.files[0].size/1024/1024;
+      if (size_in_megabytes > 5) {
+        alert('Maximum file size is 5MB. Please choose a smaller file.');
+      }
+    });
+
+  = debug(@hike)
+  = submit_tag 'Create hike'

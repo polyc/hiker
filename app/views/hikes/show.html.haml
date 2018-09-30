@@ -28,6 +28,20 @@
       = link_to "#{User.find(@hike.user_id).nickname}", profile_path
     -else
       = link_to "#{User.find(@hike.user_id).nickname}", user_path(User.find(@hike.user_id).id)
+  %li
+    Map
+    = image_tag @hike.map_image,:class=> "img-circular" if @hike.map_image?
+
+  :css
+    .img-circular{
+      width: 400px;
+      height: 400px;
+      background-size: cover;
+      display: block;
+      border-radius: 300px;
+      -webkit-border-radius: 300px;
+      -moz-border-radius: 300px;
+    }
 
 %h3 Description
 = @hike.description

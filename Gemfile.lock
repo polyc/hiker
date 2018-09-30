@@ -164,6 +164,7 @@ GEM
     globalid (0.4.1)
       activesupport (>= 4.2.0)
     gmaps4rails (2.1.2)
+    googlestaticmap (1.2.5)
     guard (2.14.2)
       formatador (>= 0.2.4)
       listen (>= 2.7, < 4.0)
@@ -274,6 +275,8 @@ GEM
       oauth2 (~> 1.1)
       omniauth (~> 1.2)
     orm_adapter (0.5.0)
+    osm_tile_grabber (1.0.1)
+      rmagick
     parallel (1.12.1)
     parser (2.5.1.2)
       ast (~> 2.4.0)
@@ -339,6 +342,7 @@ GEM
       http-cookie (>= 1.0.2, < 2.0)
       mime-types (>= 1.16, < 4.0)
       netrc (~> 0.8)
+    rmagick (2.16.0)
     roodi (3.3.1)
       ruby_parser (~> 3.2, >= 3.2.2)
     rspec (3.8.0)
@@ -455,6 +459,7 @@ DEPENDENCIES
   factory_bot_rails
   geocoder
   gmaps4rails
+  googlestaticmap
   guard-rspec
   haml
   jasmine-rails
@@ -465,9 +470,11 @@ DEPENDENCIES
   metric_fu
   mini_magick
   omniauth-facebook
+  osm_tile_grabber
   polylines
   puma (~> 3.7)
   rails (= 5.1.5)
+  rmagick
   rspec-rails
   sass-rails (~> 5.0)
   selenium-webdriver

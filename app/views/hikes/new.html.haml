@@ -1,7 +1,7 @@
 
 %div.Hike_form
   %h1 Hike form
-  = form_tag hikes_path, :multipart => true, :method => :post do
+  = form_tag hikes_path, :method => :post do
     %p Name:
     = text_field :hike, :name
 
@@ -26,16 +26,4 @@
     %p File GPX
     = file_field :hike, :filename
 
-    %p Hike image
-    = file_field :hike, :hike_image, accept: 'image/jpeg,image/gif,image/png'
-
-    :javascript
-      $('#hike_picture').bind('change', function() {
-        var size_in_megabytes = this.files[0].size/1024/1024;
-        if (size_in_megabytes > 5) {
-          alert('Maximum file size is 5MB. Please choose a smaller file.');
-        }
-      });
-
-    = debug(@hike)
     = submit_tag 'Create hike'
