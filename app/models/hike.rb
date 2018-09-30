@@ -2,6 +2,10 @@ class Hike < ActiveRecord::Base
 
   require 'date'
   require 'json'
+  require 'RMagick'
+  require 'open-uri'
+  require 'osm_tile_grabber'
+  require 'googlestaticmap'
 
   has_many :comments, :dependent => :destroy
   belongs_to :user
@@ -24,8 +28,21 @@ class Hike < ActiveRecord::Base
   validates :tipo, :presence => true, :inclusion =>  { :in => %w( T E EE EEA EAI ) }
   validate :image_size
 
-  before_save :parse_gpx, :image_size
+  before_save :parse_gpx, :image_size#, :map
   after_save :destroy_gpxfile
+
+  def map
+    if filename.present?
+      s = "https://maps.googleapis.com/maps/api/staticmap?size=400x400&center=59.900503,-135.478011&zoom=4&path=color:0x0000ff|weight:5"
+      x = route
+
+      x.each do |y|
+        s = s + '|' + y[:lat] + ',' + y[:lon]
+      end
+      s = s + "&key=AIzaSyCZUPrU_U8A5xvKDTRJQDNwlrN_mcsfET8"
+      self.map_image = s
+    end
+  end
 
 
   # Validates the size of an uploaded picture.
@@ -45,6 +62,7 @@ class Hike < ActiveRecord::Base
     length = 0.0
 
     if filename.present?
+      s = "https://maps.googleapis.com/maps/api/staticmap?size=400x400&center=59.900503,-135.478011&zoom=4&path=color:0x0000ff|weight:5"
       file = File.open(filename)
       doc = Nokogiri::XML(file)
       trackpoints = doc.xpath('//xmlns:trkpt')
@@ -66,6 +84,12 @@ class Hike < ActiveRecord::Base
         r << {lat: lat, lon: lon, ele: ele}
         count += 1
       end
+
+      for i in 0..(r.length-1) do
+        s = s + '|' + r[i][:lat].to_s + ',' + r[i][:lon].to_s
+      end
+      s = s + "&key=AIzaSyCZUPrU_U8A5xvKDTRJQDNwlrN_mcsfET8"
+      self.map_image = s
 
       for i in 0..(r.length-2) do
         length += Geocoder::Calculations.distance_between([r[i][:lat].to_f,r[i][:lon].to_f], [r[i+1][:lat].to_f,r[i+1][:lon].to_f])
