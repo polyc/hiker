@@ -7,10 +7,10 @@
         = form_tag(:action => 'login_attempt') do
           .ul.login.login-data
             .li.login.login-data
-              Username or Email
+              Username or Email&nbsp;
               #{text_field_tag(:username_or_email)}
             .li.login.login-data
-              Password
+              Password&nbsp;
               #{password_field_tag (:login_password)}
             .li.login.login-data
               = submit_tag("Log In")
