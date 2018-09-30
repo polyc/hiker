@@ -1,7 +1,13 @@
-%div.Change_Email_Form
-  %h1 Change Email
-  = form_tag change_email_path, :method => :post do
-    %p New Email:
-    = email_field_tag 'email'
-
-    = submit_tag 'Save'
+.change-email
+  .row.change-email.title
+    .h1 CHANGE EMAIL
+  .wrapper.change-email
+    .row.change-email.data
+      .col-md-4.change-email
+        = form_tag change_email_path, :method => :post do
+          .ul.change-email
+            .li.change-email
+              New Email
+              = email_field_tag 'email'
+            .li.change-email
+              = submit_tag("Save")

@@ -10,6 +10,8 @@ class Hike < ActiveRecord::Base
   has_many :comments, :dependent => :destroy
   belongs_to :user
 
+  has_many :favorites, as: :favoritable
+
   def self.all_ratings ; %w[ 0 0.5 1 1.5 2 2.5 3 3.5 4 4.5 5 ] ; end
   def self.all_types ; %w[ T E EE EEA EAI ] ; end
   def self.all_difficulty ; %w[ P, I, E ] ; end

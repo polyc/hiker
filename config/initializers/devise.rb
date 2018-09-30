@@ -256,7 +256,7 @@ Devise.setup do |config|
   # ==> OmniAuth
   # Add a new OmniAuth provider. Check the wiki for more information on setting
   # up on your models and hooks.
-  config.omniauth :facebook, "462215670959075", "92eea1c5780efa6ba02374b916f0bf7b", callback_url: "http://localhost:3000/users/auth/facebook/callback", scope: 'public_profile, email, user_birthday, user_gender', display: 'popup', info_fields: 'name, email, first_name, last_name, birthday, gender', client_options: {
+  config.omniauth :facebook, "462215670959075", "92eea1c5780efa6ba02374b916f0bf7b", callback_url: "http://localhost:3000/users/auth/facebook/callback", scope: 'public_profile, email', display: 'popup', info_fields: 'name, email, first_name, last_name', client_options: {
                     site: 'https://graph.facebook.com/v3.1',
                     authorize_url: "https://www.facebook.com/v3.1/dialog/oauth"
                 }

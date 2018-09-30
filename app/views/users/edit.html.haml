@@ -8,7 +8,7 @@
   = text_field :user, :surname
 
   %p Sex:
-  = select :user, :gender, %w(male female)
+  = select :user, :gender, %w(male female not-specified)
 
   %p Birth Date:
   = date_select :user, :birthdate

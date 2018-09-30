@@ -269,7 +269,7 @@ textarea {
   background-color: white;
   justify-content: center;
   width: 80%;
-  border-radius: 7%;
+  border-radius: 40px;
   border-style: groove;
 }
 
@@ -297,7 +297,7 @@ textarea {
   background-color: white;
   justify-content: center;
   width: 80%;
-  border-radius: 7%;
+  border-radius: 40px;
   border-style: groove;
 }
 
@@ -364,4 +364,202 @@ textarea {
   border-style: groove;
   border-radius: 50;
   background-color: forestgreen;
+}
+
+//LOGIN FORM
+////////////////////////////////////////////////////////////////////////////////
+.login{
+
+}
+
+.row.login.title{
+  display: flex;
+  justify-content: center;
+}
+
+.wrapper.login.login-data{
+  display: flex;
+  justify-content: center;
+  align-content: space-around;
+}
+
+.row.login.login-data{
+  display: flex;
+  background-color: white;
+  justify-content: center;
+  width: 35%;
+  border-radius: 40px;
+  border-style: solid;
+  border-color: forestgreen;
+  border-width: thick;
+  align-content: space-around;
+  min-height: 300px;
+}
+
+.col-md-4.login.login-data{
+  width:180%;
+  min-height: 300px;
+}
+
+.ul.login.login-data{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  min-height: 300px;
+}
+
+.li.login.login-data{
+  display: flex;
+  //font-size: 170%;
+  justify-content: center;
+  //width: 70%;
+}
+
+//CHANGE EMAIL FORM
+////////////////////////////////////////////////////////////////////////////////
+.change-email{
+
+}
+
+.row.change-email.title{
+  display: flex;
+  justify-content: center;
+}
+
+.wrapper.change-email{
+  display: flex;
+  justify-content: center;
+  align-content: space-around;
+}
+
+.row.change-email.data{
+  display: flex;
+  background-color: white;
+  justify-content: center;
+  width: 35%;
+  border-radius: 40px;
+  border-style: solid;
+  border-color: forestgreen;
+  border-width: thick;
+  align-content: space-around;
+  min-height: 60px;
+}
+
+.col-md-4.change-email{
+  width:180%;
+  min-height: 60px;
+}
+
+.ul.change-email{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  min-height: 150px;
+}
+
+.li.change-email{
+  display: flex;
+  font-size: 170%;
+  justify-content: center;
+  //width: 70%;
+}
+
+//CHANGE PASSWORD FORM
+///////////////////////////////////////////////////////////////////////////////
+.change-password{
+
+}
+
+.row.change-password.title{
+  display: flex;
+  justify-content: center;
+}
+
+.wrapper.change-password{
+  display: flex;
+  justify-content: center;
+  align-content: space-around;
+}
+
+.row.change-password.data{
+  display: flex;
+  background-color: white;
+  justify-content: center;
+  width: 35%;
+  border-radius: 40px;
+  border-style: solid;
+  border-color: forestgreen;
+  border-width: thick;
+  align-content: space-around;
+  min-height: 60px;
+}
+
+.col-md-4.change-password{
+  width:180%;
+  min-height: 60px;
+}
+
+.ul.change-password{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  min-height: 250px;
+}
+
+.li.change-password{
+  display: flex;
+  font-size: 170%;
+  justify-content: center;
+  align-content: space-between;
+  //width: 70%;
+}
+
+//CHANGE NICKNAME FORM
+////////////////////////////////////////////////////////////////////////////////
+
+.change-nickname{
+
+}
+
+.row.change-nickname.title{
+  display: flex;
+  justify-content: center;
+}
+
+.wrapper.change-nickname{
+  display: flex;
+  justify-content: center;
+  align-content: space-around;
+}
+
+.row.change-nickname.data{
+  display: flex;
+  background-color: white;
+  justify-content: center;
+  width: 35%;
+  border-radius: 40px;
+  border-style: solid;
+  border-color: forestgreen;
+  border-width: thick;
+  align-content: space-around;
+  min-height: 60px;
+}
+
+.col-md-4.change-nickname{
+  width:180%;
+  min-height: 60px;
+}
+
+.ul.change-nickname{
+  display: flex;
+  flex-direction: column;
+  justify-content: space-around;
+  min-height: 150px;
+}
+
+.li.change-nickname{
+  display: flex;
+  font-size: 170%;
+  justify-content: center;
+  //width: 70%;
 }

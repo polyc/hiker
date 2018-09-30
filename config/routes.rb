@@ -14,6 +14,8 @@ Rails.application.routes.draw do
   get "signup", :to => "users#new"
   get "hike_preferencies_setup", :to => "users#hike_preferencies_setup"
   put "hike_preferencies_setup", :to => "users#hike_preferencies_update"
+  post "add_to_banned_users", :to => "users#add_to_banned_users"
+  post "remove_from_banned_users", :to => "users#remove_from_banned_users"
 
   get "hike_photo", :to => "hikes#upload_hike_photo_setup"
   put "hike_photo", :to => "hikes#upload_hike_photo_update"
@@ -32,6 +34,8 @@ Rails.application.routes.draw do
   get "change_nickname", :to => "sessions#change_nickname"
   post "change_nickname", :to => "sessions#update_nickname"
   post "set_profile_private", :to => "sessions#set_profile_private"
+  post "add_hike_to_favorites", :to => "sessions#add_hike_to_favorites"
+  post "remove_hike_from_favorites", :to => "sessions#remove_hike_from_favorites"
 
   post "add_following", :to => "users#add_following"
   post "delete_following", :to => "users#delete_following"
