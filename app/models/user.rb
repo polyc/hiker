@@ -39,10 +39,17 @@ class User < ActiveRecord::Base
   validates :password, :confirmation => true #password_confirmation attr
   validates_length_of :password, presence: true, :in => 6..20, :on => :create, allow_nil: true
   validate :image_size
+  validate :check_city
 
   before_save :encrypt_password
   after_save :clear_password
 
+  def check_city
+    result = Geocoder.search(city)
+    if result.empty?
+      errors.add(:city, "should be a real city")
+    end
+  end
 
     # Validates the size of an uploaded picture.
   def image_size

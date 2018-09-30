@@ -1,6 +1,6 @@
 class HikesController < ApplicationController
 
-  before_action :authenticate_user, :only => [:new, :create, :index, :show]
+  before_action :authenticate_user, :only => [:new, :create, :index, :show, :upload_hike_photo_setup, :upload_hike_photo_update]
 
   def index
     @hikes = Hike.all.order(:created_at)
@@ -23,19 +23,19 @@ class HikesController < ApplicationController
     if @hike.save
       flash[:notice]= "Hike created successfully"
       session["tmp_hikeID"] = @hike.id
-      redirect_to hikes_path
+      redirect_to hike_photo_upload_setup_path
     else
       flash[:warning]= "Invalid form compilation"
       render "new"
     end
   end
 
-  def upload_hike_photo_setup
-    #@hike = Hike.find(id: session["tmp_hikeID"])
+  def hike_photo_upload_setup
+
   end
 
-  def upload_hike_photo_update
-    @hike = Hike.find(id: session["tmp_hikeID"])
+  def hike_photo_upload_update
+    @hike = Hike.find(session["tmp_hikeID"])
     session["tmp_hikeID"] = nil
     @hike.hike_image = params[:hike_image]
     if @hike.save

@@ -17,8 +17,8 @@ Rails.application.routes.draw do
   post "add_to_banned_users", :to => "users#add_to_banned_users"
   post "remove_from_banned_users", :to => "users#remove_from_banned_users"
 
-  get "hike_photo", :to => "hikes#upload_hike_photo_setup"
-  put "hike_photo", :to => "hikes#upload_hike_photo_update"
+  get "hike_photo_upload_setup", :to => "hikes#hike_photo_upload_setup"
+  put "hike_photo_upload_setup", :to => "hikes#hike_photo_upload_update"
 
   get "login", :to => "sessions#login"
   get "logout", :to => "sessions#logout"
