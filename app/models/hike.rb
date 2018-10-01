@@ -4,7 +4,6 @@ class Hike < ActiveRecord::Base
   require 'json'
   require 'RMagick'
   require 'open-uri'
-  require 'osm_tile_grabber'
   require 'googlestaticmap'
 
   has_many :comments, :dependent => :destroy
