@@ -27,14 +27,7 @@
             %li= link_to image_tag("http://codeitdown.com/media/Home_Icon.svg", :class=> "img-circular"), home_path
             %li= link_to image_tag("https://media.istockphoto.com/vectors/settings-icon-vector-sign-and-symbol-isolated-on-white-background-vector-id1001130834", :class=> "img-circular"), setting_path
             %li= link_to image_tag("https://image.shutterstock.com/display_pic_with_logo/193772358/1170726598/stock-vector-logout-icon-vector-isolated-on-white-background-for-your-web-and-mobile-app-design-logout-logo-1170726598.jpg", :class=> "img-circular"), logout_path
-            :css
-              .img-circular{
-                width: 30px;
-                height: 30px;
-                border-radius: 15px;
-                -webkit-border-radius: 15px;
-                -moz-border-radius: 15px;
-              }
+            
   %br
 
   - if flash[:notice]
