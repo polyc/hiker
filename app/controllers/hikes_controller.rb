@@ -23,7 +23,7 @@ class HikesController < ApplicationController
     if @hike.save
       flash[:notice]= "Hike created successfully"
       session["tmp_hikeID"] = @hike.id
-      redirect_to hike_photo_upload_setup_path
+      redirect_to hike_photo_upload_setup_path(@hike)
     else
       flash[:warning]= "Invalid form compilation"
       render "new"
@@ -37,8 +37,7 @@ class HikesController < ApplicationController
   def hike_photo_upload_update
     @hike = Hike.find(session["tmp_hikeID"])
     session["tmp_hikeID"] = nil
-    @hike.hike_image = params[:hike_image]
-    if @hike.save
+    if @hike.update_attribute(:hike_image, Rails.root.join(hike_params[:hike_image]).open)
       flash[:notice] = "Hike photo uploaded"
     else
       flash[:warning] = "No photo uploaded"

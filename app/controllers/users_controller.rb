@@ -1,7 +1,7 @@
 class UsersController < ApplicationController
 
   before_action :save_login_state, :only => [:new, :create]
-  before_action :authenticate_user, :only => [:show]
+  before_action :authenticate_user, :only => [:show, :edit, :update, :add_following, :add_to_banned_users, :add_hike_to_favorites, :remove_from_banned_users, :followers, :following]
 
   def index
     @users = User.all.order(:nickname)
