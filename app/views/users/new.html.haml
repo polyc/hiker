@@ -1,43 +1,49 @@
+.signup
+  .row.signup.title
+    .h1 SIGN UP
+  .wrapper.signup.signup-data
+    .row.signup.signup-data
+      .col-md-4.signup.signup-data
+        = form_tag users_path, :multipart => true, :method => :post do
+          .ul.signup.signup-data
+            .li.signup.signup-data
+              Name&nbsp;
+              = text_field :user, :name
+            .li.signup.signup-data
+              Surname&nbsp;
+              = text_field :user, :surname
+            .li.signup.signup-data
+              Sex&nbsp;
+              = select :user, :gender, %w(male female not-specified)
+            .li.signup.signup-data
+              Birthday&nbsp;
+              = date_select :user, :birthdate
+            .li.signup.signup-data
+              Username&nbsp;
+              = text_field :user, :nickname
+            .li.signup.signup-data
+              Email&nbsp;
+              = text_field :user, :email
+            .li.signup.signup-data
+              City&nbsp;
+              = text_field :user, :city
+            .li.signup.signup-data
+              Profile picture&nbsp;
+              = file_field :user, :image, accept: 'image/jpeg,image/gif,image/png'
 
-%div.Sign_Form
-  %h1 Sign Up
-  = form_tag users_path, :multipart => true, :method => :post do
-    %p Name:
-    = text_field :user, :name
+              :javascript
+                $('#user_image').bind('change', function() {
+                  var size_in_megabytes = this.files[0].size/1024/1024;
+                  if (size_in_megabytes > 5) {
+                    alert('Maximum file size is 5MB. Please choose a smaller file.');
+                  }
+                });
 
-    %p Surname:
-    = text_field :user, :surname
-
-    %p Sex:
-    = select :user, :gender, %w(male female not-specified)
-
-    %p Birth Date:
-    = date_select :user, :birthdate
-
-    %p Username:
-    = text_field :user, :nickname
-
-    %p Email:
-    = text_field :user, :email
-
-    %p City:
-    = text_field :user, :city
-
-    %p Password:
-    = password_field :user, :password
-
-    %p Password Confirmation:
-    = password_field :user, :password_confirmation
-
-    %p Profile picture
-    = file_field :user, :image, accept: 'image/jpeg,image/gif,image/png'
-
-    :javascript
-      $('#user_image').bind('change', function() {
-        var size_in_megabytes = this.files[0].size/1024/1024;
-        if (size_in_megabytes > 5) {
-          alert('Maximum file size is 5MB. Please choose a smaller file.');
-        }
-      });
-
-    = submit_tag 'Signup'
+            .li.signup.signup-data
+              Password&nbsp;
+              = password_field :user, :password
+            .li.signup.signup-data
+              Password Confirmation&nbsp;
+              = password_field :user, :password_confirmation
+            .li.signup.signup-data
+              = submit_tag 'Signup'

@@ -1,29 +1,34 @@
-
-%div.Hike_form
-  %h1 Hike form
-  = form_tag hikes_path, :method => :post do
-    %p Name:
-    = text_field :hike, :name
-
-    %p  Difficulty:
-    = select :hike, :difficulty, %w( P I E )
-
-    %p Nature:
-    = text_area :hike, :nature
-
-    %p Equipment:
-    = text_area :hike, :equipment
-
-    %p Description
-    = text_area :hike, :description
-
-    %p Rating:
-    = select :hike, :rating, %w( 0 0.5 1 1.5 2 2.5 3 3.5 4 4.5 5 )
-
-    %p Type:
-    = select :hike, :tipo, [ 'T', 'E', 'EE', 'EEA', 'EAI' ]
-
-    %p File GPX
-    = file_field :hike, :filename
-
-    = submit_tag 'Create hike'
+.new-hike
+  .row.new-hike.title
+    .h1 New Hike
+  .wrapper.new-hike.new-hike-data
+    .row.new-hike.new-hike-data
+      .col-md-4.new-hike.new-hike-data
+        = form_tag hikes_path, :method => :post do
+          .ul.new-hike.new-hike-data
+            .li.new-hike.new-hike-data
+              Name&nbsp;
+              = text_field :hike, :name
+            .li.new-hike.new-hike-data
+              Difficulty&nbsp;
+              = select :hike, :difficulty, %w( P I E )
+            .li.new-hike.new-hike-data
+              Nature&nbsp;
+              = text_area :hike, :nature
+            .li.new-hike.new-hike-data
+              Equipment&nbsp;
+              = text_area :hike, :equipment
+            .li.new-hike.new-hike-data
+              Description&nbsp;
+              = text_area :hike, :description
+            .li.new-hike.new-hike-data
+              Rating&nbsp;
+              = select :hike, :rating, %w( 0 0.5 1 1.5 2 2.5 3 3.5 4 4.5 5 )
+            .li.new-hike.new-hike-data
+              Type&nbsp;
+              = select :hike, :tipo, [ 'T', 'E', 'EE', 'EEA', 'EAI' ]
+            .li.new-hike.new-hike-data
+              File GPX&nbsp;
+              = file_field :hike, :filename
+            .li.new-hike.new-hike-data
+              = submit_tag 'Signup'
