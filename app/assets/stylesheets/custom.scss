@@ -87,14 +87,14 @@ textarea {
 
 }
 
-.row.profile.follow-list-link{
+.row.profile.link{
   display: flex;
   justify-content: center;
   height: 15%;
   width: 70%;
   border-style: solid;
   border-radius: 20px;
-  background-color: silver;
+  background-color: black;
   align-items: center;
 }
 
@@ -105,7 +105,14 @@ textarea {
   border-color: black;
   border-style: solid;
   background-color: white;
-  width: 120%
+  width: 120%;
+  justify-content: center;
+}
+
+.col-md-3.profile.favorites{
+  display: flex;
+  align-items: center;
+  justify-content: space-evenly;
 }
 
 .row.profile.user-content{
@@ -114,11 +121,22 @@ textarea {
   border-color: black;
   border-style: solid;
   border-radius: 30px;
-  background-color: forestgreen;
+  background-color: silver;
   width: 70%;
 }
 .row.profile.user-photo{
+  display: flex;
+  justify-content: center;
+  height: 40%;
+  width: 100%;
+}
 
+.user-photo{
+  width: 35%;
+  height: 100%;
+  border-radius: 50%;
+  -webkit-border-radius: 50%;
+  -moz-border-radius: 50%;
 }
 
 .row.profile.user-personal-info{
@@ -126,11 +144,11 @@ textarea {
 }
 
 .row.profile.user-name-surname{
-
+  height: 10%;
 }
 
 .row.profile.user-personal-info{
-
+  height: 30%
 }
 
 .ul.profile.user-personal-info{
@@ -143,43 +161,15 @@ textarea {
   justify-content: center;
 }
 
-.profile-completed-hikes{
-
-}
-
-.row.profile.hike-content{
-  display: flex;
-  justify-content: center;
-  border-color: black;
-  border-style: solid;
-  border-radius: 30px;
-  background-color: forestgreen;
-}
-
-.col-md-3.profile.hike-description{
+.completed-hikes{
+  min-height: 100vh;
+  background-color: silver;
   display: flex;
   flex-direction: column;
-  border-color: black;
-  border-style: solid;
-  background-color: white;
+  //width: 165%;
+  align-items: center;
 }
 
-.col-md-3.profile.hike-info{
-  display: flex;
-  flex-direction: column;
-  border-color: black;
-  border-style: solid;
-  background-color: white;
-}
-
-.col-md-5.hike-photo{
-  display: flex;
-  flex-direction: column;
-  border-color: black;
-  border-style: solid;
-  background-color: white;
-  min-height: 350px;
-}
 
 //HOME VIEW
 //////////////////////////////////////////////////
