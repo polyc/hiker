@@ -22,25 +22,22 @@
   .col-md-3.search-results
     -if @hikes != nil
       - @hikes.each do |h|
-        .wrapper.search-results
-          .row.hike-title
-            #{h.name}
-
-          .row.search.hike-content
-            .col-md-3.search.hike-photo
-              Hike Photo
-            .col-md-3.home.hike-description
-              #{h.description}
-            .col-md-3.home.hike-info
+        %header.hike-title #{h.name}
+        .row.content
+          .columns
+            %hike-photo-col
+              = image_tag h.hike_image.url,:class=> "hike-photo" if h.hike_image?
+            %aside.hike-description #{h.description}
+            %aside.hike-info-box
               .row.hike-info-brief
                 .ul
-                  .li Type: #{h.tipo}
-                  .li Rating: #{h.rating}
-                  .li Distance: #{h.distance}
-              .row.search.hike-info
+                  .li.hike Type: #{h.tipo}
+                  .li.hike Rating: #{h.rating}
+                  .li.hike Distance: #{h.distance}
+              .row.hike-info
                 = link_to 'More info', hike_path(h)
-
     = will_paginate @hikes
+
 
     %h4 Users table
     %table#users
