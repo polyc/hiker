@@ -87,7 +87,7 @@ class SessionsController < ApplicationController
     else
       flash[:warning] = "cannot add to my favorite hikes"
     end
-    redirect_to hike_path(@hike)
+    redirect_to home_path
   end
 
   def remove_hike_from_favorites
@@ -100,6 +100,12 @@ class SessionsController < ApplicationController
       flash[:warning] = "cannot remove it from favorites"
     end
     redirect_to hike_path(params[:format])
+  end
+
+  def show_favorites
+      @user = User.find(session[:user_id])
+      favoritable_ids = @user.favorites.select("favoritable_id")
+      @favorites = pag(Hike.where(id: favoritable_ids))
   end
 
 ##############################################################

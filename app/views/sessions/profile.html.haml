@@ -22,7 +22,7 @@
           .li=link_to "Change Your Hike Preferencies", hike_preferencies_setup_path
     .col-md-3.profile.favorites
       .row.profile.link
-        =link_to 'Favorite Hikes'
+        =link_to 'Favorite Hikes', show_favorites_path
 
 
 
@@ -42,4 +42,9 @@
               .li.hike Distance: #{h.distance}
           .row.hike-info
             = link_to 'More info', hike_path(h)
+          .row.hike-info
+            -if @user.favorites.nil? || @user.favorites.where(user_id: @user.id, favoritable_id: h.id).empty?
+              = link_to 'Aggiungi ai preferiti', add_hike_to_favorites_path(h), method: :post
+            -else
+              = link_to 'Rimuovi dai preferiti', remove_hike_from_favorites_path(h), method: :post
 = will_paginate @user_hikes

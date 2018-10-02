@@ -1,0 +1,18 @@
+.favorites
+  -if @favorites != nil
+    - @favorites.each do |h|
+      %header.hike-title #{h.name}
+      .row.content
+        .columns
+          %hike-photo-col
+            = image_tag h.hike_image.url,:class=> "hike-photo" if h.hike_image?
+          %aside.hike-description #{h.description}
+          %aside.hike-info-box
+            .row.hike-info-brief
+              .ul
+                .li.hike Type: #{h.tipo}
+                .li.hike Rating: #{h.rating}
+                .li.hike Distance: #{h.distance}
+            .row.hike-info
+              = link_to 'More info', hike_path(h)
+  = will_paginate @favorites

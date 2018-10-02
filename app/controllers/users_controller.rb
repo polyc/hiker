@@ -11,6 +11,7 @@ class UsersController < ApplicationController
     id = params[:id]
     @user = User.find(id)
     @user_hikes = pag(Hike.all.where(user_id:@user.id))
+    @current_user = User.find(session[:user_id])
   end
 
   def new
@@ -85,7 +86,7 @@ class UsersController < ApplicationController
     @title = "Followers"
     id = session[:user_id]
     @user = User.find(id)
-    @users = @user.followers
+    @users = pag(@user.followers)
     render 'show_follow'
   end
 
@@ -93,7 +94,7 @@ class UsersController < ApplicationController
     @title = "Following"
     id = session[:user_id]
     @user = User.find(id)
-    @users = @user.following
+    @users = pag(@user.following)
     render 'show_follow'
   end
 

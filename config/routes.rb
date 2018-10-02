@@ -36,6 +36,7 @@ Rails.application.routes.draw do
   post "set_profile_private", :to => "sessions#set_profile_private"
   post "add_hike_to_favorites", :to => "sessions#add_hike_to_favorites"
   post "remove_hike_from_favorites", :to => "sessions#remove_hike_from_favorites"
+  get "show_favorites", :to => "sessions#show_favorites"
 
   post "add_following", :to => "users#add_following"
   post "delete_following", :to => "users#delete_following"
