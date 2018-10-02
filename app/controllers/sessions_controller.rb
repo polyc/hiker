@@ -166,7 +166,7 @@ class SessionsController < ApplicationController
 
   private
   def pag(obj)
-    obj.paginate(:page => params[:page], :per_page => 5)
+    obj.paginate(:page => params[:page], :per_page => 4)
   end
 
 end

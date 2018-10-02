@@ -1,22 +1,17 @@
 .feed
-  .row.hike-box
-    - @hikes.each do |h|
-      .col-md-3.hike-title
-        #{h.name}
-
-      .col-md-3.hike-content
-        .col-md-5.hike-photo
-          Hike Photo
-        .col-md-3.home.hike-description
-          #{h.description}
-        .col-md-3.home.hike-info
+  - @hikes.each do |h|
+    %header.hike-title #{h.name}
+    .row.content
+      .columns
+        %hike-photo-col
+          = image_tag h.hike_image.url,:class=> "hike-photo" if h.hike_image?
+        %aside.hike-description #{h.description}
+        %aside.hike-info-box
           .row.hike-info-brief
             .ul
-              .li Type: #{h.tipo}
-              .li Rating: #{h.rating}
-              .li Distance: #{h.distance}
+              .li.hike Type: #{h.tipo}
+              .li.hike Rating: #{h.rating}
+              .li.hike Distance: #{h.distance}
           .row.hike-info
             = link_to 'More info', hike_path(h)
-
-
-    = will_paginate @hikes
+= will_paginate @hikes
