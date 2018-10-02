@@ -27,29 +27,16 @@ class Hike < ActiveRecord::Base
   #validates :nature, :length => { :in 0..128 }
   validates :rating, :presence => true, :inclusion => 0..5
   validates :tipo, :presence => true, :inclusion =>  { :in => %w( T E EE EEA EAI ) }
-  validate :image_size
+  validate :image_size, :on :hike_photo_upload_update
 
-  before_save :parse_gpx, :image_size#, :map
+  before_save :parse_gpx, :image_size
   after_save :destroy_gpxfile
 
-  def map
-    if filename.present?
-      s = "https://maps.googleapis.com/maps/api/staticmap?size=400x400&center=59.900503,-135.478011&zoom=4&path=color:0x0000ff|weight:5"
-      x = route
 
-      x.each do |y|
-        s = s + '|' + y[:lat] + ',' + y[:lon]
-      end
-      s = s + "&key=AIzaSyCZUPrU_U8A5xvKDTRJQDNwlrN_mcsfET8"
-      self.map_image = s
-    end
-  end
-
-
-  # Validates the size of an uploaded picture.
+  # Validates the size of uploaded picture.
   def image_size
-    if hike_image.size > 5.megabytes
-      errors.add(:hike_image, "should be less than 5MB")
+    if hike_image.size > 1.megabytes
+      errors.add(:hike_image, "should be less than 1MB")
     end
   end
 
