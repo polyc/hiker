@@ -39,16 +39,19 @@
     = will_paginate @hikes
 
 
-    %h4 Users table
-    %table#users
-      %thead
-        %tr
-          %th
+    .row.user-resutls
+      -if @users != nil
+        - @users.each do |u|
+          %header.user-title
+            =link_to "#{u.nickname}", user_path(u)
+          .row.content
+            .columns
+              %user-photo-col
+                = image_tag u.image.url,:class=> "user-photo-index" if u.image?
+              %aside.user-info-box
+                .row.user-info-brief
+                  .ul
+                    .li.user Name: #{u.name}
+                    .li.user Surname: #{u.surname}
 
-      %tbody
-        -if @users != nil
-          - @users.each do |u|
-            %tr
-              %td= link_to "#{u.nickname}", user_path(u)
-
-    = will_paginate @users
+      = will_paginate @users
