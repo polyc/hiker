@@ -65,17 +65,6 @@ textarea {
 .center h1 {
   margin-bottom: 10px;
 }
-
-.container.hikes{
-  margin-left: 10px;
-  margin-right: 10px
-}
-
-.container-fluid{
-  display: flex; /* or inline-flex */
-  flex-direction: row;
-}
-
 //PROFILE VIEW
 ///////////////////////////////////////////////////
 .profile{
@@ -342,6 +331,22 @@ textarea {
   width:180%;
   font-size: 150%;
 }
+
+
+.wrapper.settings.delete-account{
+  display: flex;
+  justify-content: center;
+}
+.row.settings.delete-account{
+  display: flex;
+  background-color: white;
+  justify-content: center;
+  width: 80%;
+  border-radius: 40px;
+  border-style: solid;
+  font-size: 150%;
+}
+
 
 // SEARCH
 //////////////////////////////////////////////////////////////
