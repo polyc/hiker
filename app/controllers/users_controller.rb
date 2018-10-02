@@ -10,6 +10,7 @@ class UsersController < ApplicationController
   def show
     id = params[:id]
     @user = User.find(id)
+    @user_hikes = pag(Hike.all.where(user_id:@user.id))
   end
 
   def new
@@ -131,5 +132,10 @@ class UsersController < ApplicationController
   private
   def edit_user_params
     params.require(:user).permit(:name, :surname, :gender, :birthdate, :city)
+  end
+
+  private
+  def pag(obj)
+    obj.paginate(:page => params[:page], :per_page => 4)
   end
 end

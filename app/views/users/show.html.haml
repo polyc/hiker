@@ -1,55 +1,50 @@
-%h1 #{@user.nickname}
+.profile
+  -if @user.banned?(User.find(session[:user_id])) == false
+    .row.profile.user-content
+      .col-md-3.profile.left-buttons
+        .row.profile.link
+          -if session[:user_id] != @user.id
+            -if User.find(session[:user_id]).banned?(@user)
+              = link_to 'unban user', remove_from_banned_users_path(@user), method: :post
+            -else
+              = link_to 'ban user', add_to_banned_users_path(@user), method: :post
+      .col-md-3.profile.info
+        .row.profile.user-photo
+          = image_tag @user.image.url,:class=> "user-photo" if @user.image?
+        .row.profile.user-name-surname
+          %h1 #{@user.name} #{@user.surname}
+        .row.profile.user-nickname
+          %h2 #{@user.nickname}
+        .row.profile.user-personal-info
+          .ul
+            .li Sex: #{@user.gender}
+            .l Birth Date: #{@user.birthdate}
+            .li Email: #{@user.email}
+            .li City: #{@user.city}
+      .col-md-3.profile.favorites
+        .row.profile.link
+          -if session[:user_id] != @user.id
+            -if User.find_by(id: session[:user_id]).following?(@user)
+              = link_to "unfollow", delete_following_path(@user), method: :post
+            -else
+              = link_to "follow", add_following_path(@user), method: :post
 
--if @user.banned?(User.find(session[:user_id])) == false
 
-  -if session[:user_id] != @user.id
 
-    -if User.find_by(id: session[:user_id]).following?(@user)
-      %td= link_to "unfollow", delete_following_path(@user), method: :post
-
-    -else
-      %td= link_to "follow", add_following_path(@user), method: :post
-
-  -if (@user.id == session[:user_id]) || (@user.private_profile.nil?) || (User.find(session[:user_id]).following?(@user))
-    %table#hikes
-      %thead
-        %tr
-          %th Title
-          %th Difficulty
-          %th Distance
-          %th Time
-          %th Max height
-          %th Min height
-          %th Level difference
-          %th Rating
-          %th Type
-          %th Nature
-          %th Equipment
-          %th
-
-      %tbody
-        - Hike.where(user_id: @user.id).each do |h|
-          %tr
-            %td= link_to "#{h.name}", hike_path(h)
-            %td= h.difficulty
-            %td= h.distance
-            %td= h.avg_time
-            %td= h.max_height
-            %td= h.min_height
-            %td= h.level_difference
-            %td= h.rating
-            %td= h.tipo
-            %td= h.nature
-            %td= h.equipment
-
-%br
-= link_to 'hikes', hikes_path
-%br
-= link_to 'users', users_path
-%br
-
--if session[:user_id] != @user.id
-  -if User.find(session[:user_id]).banned?(@user)
-    = link_to 'unban user', remove_from_banned_users_path(@user), method: :post
-  -else
-    = link_to 'ban user', add_to_banned_users_path(@user), method: :post
+.completed-hikes
+  - @user_hikes.each do |h|
+    %header.hike-title #{h.name}
+    .row.content
+      .columns
+        %hike-photo-col
+          = image_tag h.hike_image.url,:class=> "hike-photo" if h.hike_image?
+        %aside.hike-description #{h.description}
+        %aside.hike-info-box
+          .row.hike-info-brief
+            .ul
+              .li.hike Type: #{h.tipo}
+              .li.hike Rating: #{h.rating}
+              .li.hike Distance: #{h.distance}
+          .row.hike-info
+            = link_to 'More info', hike_path(h)
+  = will_paginate @user_hikes
