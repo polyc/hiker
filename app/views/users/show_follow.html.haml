@@ -1,12 +1,27 @@
-%h1 #{@title}
-.ul.users-follow
-  -@users.each do |u|
-    .li
-      = link_to "#{u.nickname}", user_path(u.id)
-      -if session[:user_id] != u.id
+.users-follow
+  %h1 #{@title}
 
-        -if User.find_by(id: session[:user_id]).following?(u)
-          = link_to "unfollow", delete_following_path(u), method: :post
+  .row.user-resutls
+    -if @users != nil
+      - @users.each do |u|
+        %header.user-title
+          =link_to "#{u.nickname}", user_path(u)
+        %header.user-title
+          -if session[:user_id] != u.id
+            -if User.find_by(id: session[:user_id]).following?(u)
+              = link_to "unfollow", delete_following_path(u), method: :post
+            -else
+              = link_to "follow", add_following_path(u), method: :post
 
-        -else
-          = link_to "follow", add_following_path(u), method: :post
+        .row.content
+          .columns
+            %user-photo-col
+              = image_tag u.image.url,:class=> "user-photo-index" if u.image?
+            %aside.user-info-box
+              .row.user-info-brief
+                .ul
+                  .li.user Name: #{u.name}
+                  .li.user Surname: #{u.surname}
+                  .li.user City: #{u.city}
+
+  //= will_paginate @users
