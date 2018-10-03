@@ -36,9 +36,8 @@ gem 'polylines'
 gem 'mini_magick'
 gem 'carrierwave'
 
+gem 'gon'
 gem 'rmagick'
-gem 'googlestaticmap'
-
 
 
 # Use CoffeeScript for .coffee assets and views

@@ -14,6 +14,7 @@ class HikesController < ApplicationController
     id = params[:id]
     @hike = Hike.find(id)
     @user = User.find(session[:user_id])
+    gon.map_route = @hike.route
     @favorite = Favorite.where(user_id: @user.id, favoritable_id: @hike.id)
   end
 
@@ -49,5 +50,6 @@ class HikesController < ApplicationController
   def hike_params
     params.require(:hike).permit(:name, :difficulty, :nature, :equipment, :description, :rating, :tipo, :filename, :hike_image, :user_id)
   end
+
 
 end

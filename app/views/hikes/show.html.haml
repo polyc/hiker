@@ -1,5 +1,26 @@
 %h2 #{@hike.name}
 
+%head
+  %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+  %meta{:charset => "utf-8"}/
+  %link{:href => "http://cdn.leafletjs.com/leaflet-0.7/leaflet.css", :rel => "stylesheet"}/
+  %script{:src => "http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"}
+  %script{:src => "https://d3js.org/d3.v3.min.js", :type => "text/javascript"}
+  :css
+    html,
+    body {
+        height: 100%;
+        width: 100%;
+
+    }
+    body {
+        margin: 0;
+    }
+    #map {
+        width: 50%;
+        height: 50%;
+    }
+
 %ul#details
 
   %li
@@ -22,16 +43,6 @@
     Type
     = @hike.tipo
 
-  %li
-    User_id
-    -if User.find(@hike.user_id).id == session[:user_id]
-      = link_to "#{User.find(@hike.user_id).nickname}", profile_path
-    -else
-      = link_to "#{User.find(@hike.user_id).nickname}", user_path(User.find(@hike.user_id).id)
-  %li
-    Map
-    = image_tag @hike.map_image,:class=> "img-circular" if @hike.map_image?
-
   :css
     .img-circular{
       width: 400px;
@@ -52,6 +63,7 @@
 %h3 Equipment
 = @hike.equipment
 
+
 %table#comments
   %thead
     %tr
@@ -64,17 +76,50 @@
       %tr
         %td= c.comment
         %td= link_to "#{User.find(c.user_id).nickname}", user_path(c.user_id)
-        %td= link_to "delete comment", hike_comment_path(hike_id: @hike.id, id: c.id), :method => :delete, data: { confirm: "Are you sure?" }
+        %td= link_to "delete comment&nbsp", hike_comment_path(hike_id: @hike.id, id: c.id), :method => :delete, data: { confirm: "Are you sure?" }
 
 //= render "/comments/new", :hike_id => @hike
-= link_to 'create comment', new_hike_comment_path(@hike)
+= button_to 'create comment', new_hike_comment_path(@hike)
 
 %br
-= debug(@user.favorites)
 -if @favorite.nil? || @favorite.empty?
-  = link_to 'Aggiungi ai preferiti', add_hike_to_favorites_path(@hike), method: :post
+  = button_to 'Aggiungi ai preferiti', add_hike_to_favorites_path(@hike), method: :post
 -else
-  = link_to 'Rimuovi dai preferiti', remove_hike_from_favorites_path(@hike), method: :post
+  = button_to 'Rimuovi dai preferiti', remove_hike_from_favorites_path(@hike), method: :post
 %br
 
-= link_to 'users', users_path
+= button_to 'users', users_path
+
+%body
+  #map
+
+  = include_gon
+
+:javascript
+
+  var x = gon.map_route;
+  console.log(x);
+  var path = x.replace('[', '').split(',');
+  var myArray = new Array();
+
+  for(var i=0; i<path.length-1; i+=2){
+    myArray.push([parseFloat(path[i]),parseFloat(path[i+1])]);
+  }
+  console.log(path);
+  console.log(myArray);
+
+
+  var map = L.map('map').setView([path[0],path[1]], 15);
+  L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a> contributors'}).addTo(map);
+
+  var end = L.popup()
+    .setLatLng([path[path.length-2], path[path.length-1]])
+    .setContent("Hike end")
+    .addTo(map);
+
+  var start = L.popup()
+    .setLatLng([path[0], path[1]])
+    .setContent("Hike start")
+    .addTo(map);
+
+  var polyline = L.polyline(myArray, {color: 'red'}).addTo(map);
