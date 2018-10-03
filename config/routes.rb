@@ -38,6 +38,9 @@ Rails.application.routes.draw do
   post "remove_hike_from_favorites", :to => "sessions#remove_hike_from_favorites"
   get "show_favorites", :to => "sessions#show_favorites"
 
+  post "upload_user_picture", :to => "users#upload_user_picture"
+  post "delete_user", :to => "users#delete_user"
+
   post "add_following", :to => "users#add_following"
   post "delete_following", :to => "users#delete_following"
 

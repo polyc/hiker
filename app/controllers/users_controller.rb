@@ -47,6 +47,18 @@ class UsersController < ApplicationController
 
   end
 
+  def upload_user_picture
+    @user = User.find(session[:user_id])
+    @user.update_attribute(:image, Rails.root.join(user_params[:image]).open)
+    redirect_to home_path
+  end
+
+  def delete_user
+    @user = User.find(session[:user_id])
+    @user.destroy()
+    session[:user_id] = nil
+    redirect_to users_path
+  end
   #USER HIKE PREFERENCIES METHODS
   ##############################################################################
 
