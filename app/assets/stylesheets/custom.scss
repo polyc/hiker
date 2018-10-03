@@ -125,6 +125,11 @@ textarea {
   width: 70%;
   height: 50%;
 }
+.row.change-user-picture{
+  display: flex;
+  justify-content: center;
+  height: 4%;
+}
 .row.profile.user-photo{
   display: flex;
   justify-content: center;
@@ -260,7 +265,7 @@ textarea {
 }
 
 .li.hike, .li.user{
-  font-size: 200%;
+  font-size: 150%;
 }
 
 

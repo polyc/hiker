@@ -1,5 +1,6 @@
 .feed
   - @hikes.each do |h|
+    - author = User.find(h.user_id)
     %header.hike-title #{h.name}
     .row.content
       .columns
@@ -12,6 +13,9 @@
               .li.hike Type: #{h.tipo}
               .li.hike Rating: #{h.rating}
               .li.hike Distance: #{h.distance}
+              .li.hike
+                Author:
+                = link_to "#{author.nickname}", user_path(author)
           .row.hike-info
             = link_to 'More info', hike_path(h)
           .row.hike-info
@@ -20,4 +24,4 @@
             -else
               = link_to 'Rimuovi dai preferiti', remove_hike_from_favorites_path(h), method: :post
             %br
-= will_paginate @hikes
+  = will_paginate @hikes
