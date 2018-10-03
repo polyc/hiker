@@ -33,9 +33,8 @@ class User < ActiveRecord::Base
   validates :surname, :presence => true, :length => { :in => 3..20 }
   validates :nickname, :presence => true, :length => { :in => 3..20 }
   validates :gender, :presence => true, :inclusion => { :in => %w(male female not-specified)}
-  #validates :email, :presence => true, :uniqueness => true, :format => EMAIL_REGEX
+  validates :email, :presence => true, :uniqueness => true#, :format => EMAIL_REGEX
   #validates :birthdate, :presence => true
-  #validates :description, :length => { :in => 1..256 }
   validates :password, :confirmation => true #password_confirmation attr
   validates_length_of :password, presence: true, :in => 6..20, :on => :create, allow_nil: true
   validate :image_size
