@@ -49,7 +49,7 @@ class UsersController < ApplicationController
 
   def upload_user_picture
     @user = User.find(session[:user_id])
-    @user.update_attribute(:image, Rails.root.join(user_params[:image]).open)
+    @user.update_attribute(:image, user_params[:image])
     redirect_to home_path
   end
 
