@@ -71,4 +71,66 @@ describe User, :type => :model do
   it "is invalid with a fake city" do
     build(:user, city: "Paperopoli").should_not be_valid
   end
+
+  it "checks if user inserted a real city" do
+    user = build(:user)
+    expect(user.check_city).to eq(true)
+  end
+
+  #it "checks if password matches" do
+  #  user = build(:user, password: "mannaggia", password_confirmation: "mannaggia")
+  #  expect(user.match_password("mannaggia")).to eq(user.password)
+  #end
+
+  it "discard plain text passwords after create" do
+    user = build(:user, password: "mannaggia", password_confirmation: "mannaggia")
+    user.clear_password
+    expect(user.password).to eq(nil)
+    expect(user.password_confirmation).to eq(nil)
+  end
+
+  #it "authenticates user" do
+  #  user = build(:user)
+  #  expect(User.authenticate("baffo","passwordacaso")).to eq(user)
+  #end
+
+  #it "creates user from facebook data" do
+  #  user = build(:user)
+  #  auth = { :provider => 'facebook', :uid => 1234, :info => { :email => user.email, :first_name => user.name, :last_name => user.surname, :name => user.name }}
+  #  expect(User.from_omniauth(auth).persisted?).to eq(true)
+  #end
+
+  it"unfollow a user"do
+    user1 = create(:user)
+    user2 = create(:user, email: "prova@email.com", nickname: "baffo2")
+    user1.following << user2
+    build(:relationship, follower_id: user1.id, followed_id: user2.id)
+    user1.unfollow(user2)
+    expect(user1.following).to eq([])
+  end
+
+  it"checks if user follow another user"do
+    user1 = create(:user)
+    user2 = create(:user, email: "prova@email.com", nickname: "baffo2")
+    user1.following << user2
+    build(:relationship, follower_id: user1.id, followed_id: user2.id)
+    expect(user1.following?(user2)).to eq(true)
+  end
+
+  it"unban a user"do
+    user1 = create(:user)
+    user2 = create(:user, email: "prova@email.com", nickname: "baffo2")
+    user1.condemning << user2
+    build(:ban, condemner_id: user1.id, banned_id: user2.id)
+    user1.unban(user2)
+    expect(user1.condemning).to eq([])
+  end
+
+  it"checks if user banned another user"do
+    user1 = create(:user)
+    user2 = create(:user, email: "prova@email.com", nickname: "baffo2")
+    user1.condemning << user2
+    build(:ban, condemner_id: user1.id, banned_id: user2.id)
+    expect(user1.banned?(user2)).to eq(true)
+  end
 end
