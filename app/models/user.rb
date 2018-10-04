@@ -47,6 +47,8 @@ class User < ActiveRecord::Base
     result = Geocoder.search(city)
     if result.empty?
       errors.add(:city, "should be a real city")
+    else
+      result = true
     end
   end
 
@@ -100,11 +102,11 @@ class User < ActiveRecord::Base
    where(provider: auth.provider, uid: auth.uid).first_or_create! do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
-      user.name = auth.info.first_name   # assuming the user model has a name
+      user.name = auth.info.first_name
       user.surname = auth.info.last_name
-      user.image = auth.info.image # assuming the user model has an image
       user.nickname = auth.info.name
       user.gender = "not-specified"
+      user.city = "Rome" #default because facebook doesn't return it
     end
   end
 
