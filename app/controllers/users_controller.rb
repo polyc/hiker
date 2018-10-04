@@ -144,7 +144,7 @@ class UsersController < ApplicationController
 
   private
   def edit_user_params
-    params.require(:user).permit(:name, :surname, :gender, :birthdate, :city)
+    params.require(:user).permit(:name, :surname, :gender, :birthdate, :city, :image)
   end
 
   private
