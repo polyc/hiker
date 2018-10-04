@@ -50,4 +50,24 @@ describe Hike, :type => :model do
   it "is invalid without author" do
     build(:hike, user_id:  nil).should_not be_valid
   end
+
+  it "parse gpx file" do
+    author = create(:user)
+    hike = build(:hike, user_id: author.id)
+    hike.filename = file_fixture("2018_09_13_15_53_10.gpx")
+    expect(hike.parse_gpx.to_s).to eq(hike.route)
+  end
+
+  it "destroy gpx temp file" do
+    author = create(:user)
+    hike = build(:hike, user_id: author.id, filename: file_fixture("2018_09_13_15_53_10.gpx"))
+    expect(hike.destroy_gpxfile).to eq(nil)
+  end
+
+  #it "is invalid if image is too big in data"do
+  #  author = create(:user)
+  #  hike = build(:hike, user_id: author.id)
+  #  hike.hike_image = file_fixture("Toobig.jpg")
+  #  expect(hike.image_size).to eq(false)
+  #end
 end
