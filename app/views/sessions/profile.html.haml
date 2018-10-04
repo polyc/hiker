@@ -21,11 +21,6 @@
           .li= link_to "Change Your Personal Informations", edit_user_path(@user)
           .li=link_to "Change Your Hike Preferencies", hike_preferencies_setup_path
     .col-md-3.profile.favorites
-      .row.change-user-picture
-        = form_tag upload_user_picture_path, :multipart => true, :method => :post do
-          &nbsp&nbsp&nbsp&nbsp&nbsp&nbsp Change profile picture
-          = file_field :user, :image, accept: 'image/jpeg,image/gif,image/png,image/jpg'
-          = submit_tag 'Upload profile picture'
       .row.profile.link
         =link_to 'Favorite Hikes', show_favorites_path
 
