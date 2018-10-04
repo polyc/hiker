@@ -31,7 +31,7 @@ class User < ActiveRecord::Base
   EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :name, :presence => true, :length => { :in => 3..20 }
   validates :surname, :presence => true, :length => { :in => 3..20 }
-  validates :nickname, :presence => true, :length => { :in => 3..20 }
+  validates :nickname, :presence => true,:uniqueness => true, :length => { :in => 3..20 }
   validates :gender, :presence => true, :inclusion => { :in => %w(male female not-specified)}
   validates :email, :presence => true, :uniqueness => true#, :format => EMAIL_REGEX
   #validates :birthdate, :presence => true
