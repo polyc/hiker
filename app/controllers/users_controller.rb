@@ -20,10 +20,10 @@ class UsersController < ApplicationController
 
   def create
     @user = User.new(user_params)
+    @user.hike_pref = ["T", "E", "EE", "EEA", "EAI"].to_s
     if @user.save
-      session["tmp_id"] = @user.id
       flash[:notice] = "Signed up successfully"
-      redirect_to hike_preferencies_setup_path
+      redirect_to login_path
     else
       flash[:warning] = "Form invalid"
       render "new"
@@ -67,16 +67,10 @@ class UsersController < ApplicationController
   end
 
   def hike_preferencies_update
-    if(session[:user_id].nil?)
-      @user = User.find(session["tmp_id"])
-      session["tmp_id"] = nil
-    else
-      @user = User.find(session[:user_id])
-    end
-
+    @user = User.find(session[:user_id])
     @user.update_attribute(:hike_pref, params[:hike_pref].to_s)
     flash[:notice] = "Your hike's preferencies were successfully updated"
-		redirect_to users_path
+		redirect_to profile_path
   end
 
   #FOLLOW ACTIONS
