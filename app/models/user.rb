@@ -31,11 +31,10 @@ class User < ActiveRecord::Base
   EMAIL_REGEX = /\A[\w+\-.]+@[a-z\d\-]+(\.[a-z\d\-]+)*\.[a-z]+\z/i
   validates :name, :presence => true, :length => { :in => 3..20 }
   validates :surname, :presence => true, :length => { :in => 3..20 }
-  validates :nickname, :presence => true, :length => { :in => 3..20 }
+  validates :nickname, :presence => true,:uniqueness => true, :length => { :in => 3..20 }
   validates :gender, :presence => true, :inclusion => { :in => %w(male female not-specified)}
-  #validates :email, :presence => true, :uniqueness => true, :format => EMAIL_REGEX
+  validates :email, :presence => true, :uniqueness => true#, :format => EMAIL_REGEX
   #validates :birthdate, :presence => true
-  #validates :description, :length => { :in => 1..256 }
   validates :password, :confirmation => true #password_confirmation attr
   validates_length_of :password, presence: true, :in => 6..20, :on => :create, allow_nil: true
   validate :image_size
@@ -48,6 +47,8 @@ class User < ActiveRecord::Base
     result = Geocoder.search(city)
     if result.empty?
       errors.add(:city, "should be a real city")
+    else
+      result = true
     end
   end
 
@@ -89,23 +90,16 @@ class User < ActiveRecord::Base
 
   #third party auth methods
   #########################
-  def self.new_with_session(params, session)
-    super.tap do |user|
-      if data = session["devise.facebook_data"] && session["devise.facebook_data"]["extra"]["raw_info"]
-        user.email = data["email"] if user.email.blank?
-      end
-    end
-  end
 
   def self.from_omniauth(auth)
    where(provider: auth.provider, uid: auth.uid).first_or_create! do |user|
       user.email = auth.info.email
       user.password = Devise.friendly_token[0,20]
-      user.name = auth.info.first_name   # assuming the user model has a name
+      user.name = auth.info.first_name
       user.surname = auth.info.last_name
-      user.image = auth.info.image # assuming the user model has an image
       user.nickname = auth.info.name
       user.gender = "not-specified"
+      user.city = "Rome" #default because facebook doesn't return it
     end
   end
 

@@ -76,6 +76,7 @@ class SessionsController < ApplicationController
     id = session[:user_id]
     @user = User.find(id)
     @user_hikes = pag(Hike.all.where(user_id:@user.id))
+    @birthdate = format_birthdate(@user)
   end
 
   def add_hike_to_favorites
@@ -175,4 +176,9 @@ class SessionsController < ApplicationController
     obj.paginate(:page => params[:page], :per_page => 4)
   end
 
+  private
+  def format_birthdate(user)
+    b = user.birthdate.to_s.split
+    result = b[0]
+  end
 end

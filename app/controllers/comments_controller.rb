@@ -14,8 +14,7 @@ class CommentsController < ApplicationController
       flash[:notice] = "comment created"
       redirect_to hike_path(Hike.find(params[:hike_id]))
     else
-      flash[:notice] = "Form invalid"
-      flash[:color]  = "invalid"
+      flash[:warning] = "Form invalid"
       render "new"
     end
   end
