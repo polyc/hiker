@@ -77,10 +77,10 @@ describe User, :type => :model do
     expect(user.check_city).to eq(true)
   end
 
-  #it "checks if password matches" do
-  #  user = build(:user, password: "mannaggia", password_confirmation: "mannaggia")
-  #  expect(user.match_password("mannaggia")).to eq(user.password)
-  #end
+  it "checks if password matches" do
+    user = create(:user, password: "mannaggia", password_confirmation: "mannaggia")
+    expect(user.match_password("mannaggia")).to eq(true)
+  end
 
   it "discard plain text passwords after create" do
     user = build(:user, password: "mannaggia", password_confirmation: "mannaggia")
@@ -89,10 +89,10 @@ describe User, :type => :model do
     expect(user.password_confirmation).to eq(nil)
   end
 
-  #it "authenticates user" do
-  #  user = build(:user)
-  #  expect(User.authenticate("baffo","passwordacaso")).to eq(user)
-  #end
+  it "authenticates user" do
+    user = create(:user)
+    expect(User.authenticate("baffo","passwordacaso")).to eq(user)
+  end
 
   #it "creates user from facebook data" do
   #  user = build(:user)
