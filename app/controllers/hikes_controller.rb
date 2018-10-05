@@ -38,7 +38,9 @@ class HikesController < ApplicationController
   def hike_photo_upload_update
     @hike = Hike.find(session["tmp_hikeID"])
     session["tmp_hikeID"] = nil
-    if @hike.update_attribute(:hike_image, Rails.root.join(hike_params[:hike_image]).open)
+    if hike_params[:hike_image] == ""
+      flash[:warning] = "No photo uploaded"
+    elsif @hike.update_attribute(:hike_image, Rails.root.join(hike_params[:hike_image]).open)
       flash[:notice] = "Hike photo uploaded"
     else
       flash[:warning] = "No photo uploaded"
