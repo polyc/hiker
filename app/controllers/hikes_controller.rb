@@ -1,6 +1,6 @@
 class HikesController < ApplicationController
 
-  before_action :authenticate_user, :only => [:new, :create, :index, :show, :upload_hike_photo_setup, :upload_hike_photo_update]
+  before_action :authenticate_user, :only => [:new, :create, :index, :show, :hike_photo_upload_setup, :hike_photo_upload_update]
 
   def index
     @hikes = Hike.all.order(:created_at)

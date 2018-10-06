@@ -1,6 +1,9 @@
 class SessionsController < ApplicationController
   ######DA CONTROLLARE LE AZIONI POSSIBILI QUANDO NON SI E AUTENTICATI
-  before_action :authenticate_user, :only => [:home, :profile, :setting, :search, :change_email, :update_email, :change_password, :update_password]
+  before_action :authenticate_user, :only => [:home, :profile, :setting, :index, :change_email, :update_email, :change_password, :update_password,
+  :change_nickname, :update_nickname, :logout, :set_profile_private, :show_favorites,
+  :add_hike_to_favorites, :remove_hike_from_favorites]
+
   before_action :save_login_state, :only => [:login, :login_attempt]
 
   def login
