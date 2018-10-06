@@ -1,7 +1,11 @@
 class UsersController < ApplicationController
 
   before_action :save_login_state, :only => [:new, :create]
-  before_action :authenticate_user, :only => [:show, :edit, :update, :add_following, :add_to_banned_users, :add_hike_to_favorites, :remove_from_banned_users, :followers, :following]
+
+  before_action :authenticate_user, :only => [:show, :edit, :update,
+     :add_following, :delete_following, :add_to_banned_users, :add_hike_to_favorites,
+     :remove_from_banned_users,:followers, :following, :hike_preferencies_setup,
+     :hike_preferencies_upload, :delete_user]
 
   def index
     @users = User.all.order(:nickname)
@@ -45,12 +49,6 @@ class UsersController < ApplicationController
       flash[:warning] = "Form invalid"
     end
 
-  end
-
-  def upload_user_picture
-    @user = User.find(session[:user_id])
-    @user.update_attribute(:image, user_params[:image])
-    redirect_to home_path
   end
 
   def delete_user
