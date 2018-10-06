@@ -33,8 +33,8 @@ class User < ActiveRecord::Base
   validates :surname, :presence => true, :length => { :in => 3..20 }
   validates :nickname, :presence => true,:uniqueness => true, :length => { :in => 3..20 }
   validates :gender, :presence => true, :inclusion => { :in => %w(male female not-specified)}
-  validates :email, :presence => true, :uniqueness => true#, :format => EMAIL_REGEX
-  #validates :birthdate, :presence => true
+  validates :email, :presence => true, :uniqueness => true ,format: { with: URI::MailTo::EMAIL_REGEXP }
+  validates :birthdate, :presence => true
   validates :password, :confirmation => true #password_confirmation attr
   validates_length_of :password, presence: true, :in => 6..20, :on => :create, allow_nil: true
   validate :image_size
@@ -100,6 +100,7 @@ class User < ActiveRecord::Base
       user.nickname = auth.info.name
       user.gender = "not-specified"
       user.city = "Rome" #default because facebook doesn't return it
+      user.birthdate = "2018-09-28 00:00:00"
     end
   end
 
