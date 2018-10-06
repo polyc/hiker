@@ -6,5 +6,5 @@ module SpecTestHelper
 end
 
 RSpec.configure do |config|
-  config.include SpecTestHelper, type: :controller
+  config.include SpecTestHelper, type: :feature
 end
