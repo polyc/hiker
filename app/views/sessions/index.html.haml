@@ -35,9 +35,7 @@
                   .li.hike Type: #{h.tipo}
                   .li.hike Rating: #{h.rating}
                   .li.hike Distance: #{h.distance}
-                  .li.hike
-                    Author:
-                    = link_to "#{author.nickname}", user_path(author)
+                  .li.hike= link_to "#{author.nickname}", user_path(author)
               .row.hike-info
                 = link_to 'More info', hike_path(h)
               .row.hike-info
