@@ -23,11 +23,11 @@
             %li= link_to 'Log In', login_path
           -else
             %li= link_to 'hikes', hikes_path
-            %li= link_to image_tag("https://previews.123rf.com/images/alekseyvanin/alekseyvanin1801/alekseyvanin180100897/93405661-user-account-avatar-line-icon-outline-vector-sign-linear-style-pictogram-isolated-on-white-admin-pro.jpg", :class=> "img-circular"), profile_path
-            %li= link_to image_tag("http://codeitdown.com/media/Home_Icon.svg", :class=> "img-circular"), home_path
-            %li= link_to image_tag("https://media.istockphoto.com/vectors/settings-icon-vector-sign-and-symbol-isolated-on-white-background-vector-id1001130834", :class=> "img-circular"), setting_path
-            %li= link_to image_tag("https://image.shutterstock.com/display_pic_with_logo/193772358/1170726598/stock-vector-logout-icon-vector-isolated-on-white-background-for-your-web-and-mobile-app-design-logout-logo-1170726598.jpg", :class=> "img-circular"), logout_path
-            
+            %li= link_to 'profile', profile_path #image_tag("https://previews.123rf.com/images/alekseyvanin/alekseyvanin1801/alekseyvanin180100897/93405661-user-account-avatar-line-icon-outline-vector-sign-linear-style-pictogram-isolated-on-white-admin-pro.jpg", :class=> "img-circular"), profile_path
+            %li= link_to 'home', home_path #image_tag("http://codeitdown.com/media/Home_Icon.svg", :class=> "img-circular"), home_path
+            %li= link_to 'settings', setting_path #image_tag("https://media.istockphoto.com/vectors/settings-icon-vector-sign-and-symbol-isolated-on-white-background-vector-id1001130834", :class=> "img-circular"), setting_path
+            %li= link_to 'logout', logout_path #image_tag("https://image.shutterstock.com/display_pic_with_logo/193772358/1170726598/stock-vector-logout-icon-vector-isolated-on-white-background-for-your-web-and-mobile-app-design-logout-logo-1170726598.jpg", :class=> "img-circular"), logout_path
+
   %br
 
   - if flash[:notice]
