@@ -16,6 +16,7 @@ class HikesController < ApplicationController
     @user = User.find(session[:user_id])
     gon.map_route = @hike.route
     @favorite = Favorite.where(user_id: @user.id, favoritable_id: @hike.id)
+    @comments = Comment.where(hike_id: @hike.id)
   end
 
   def create
