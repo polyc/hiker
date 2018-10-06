@@ -4,6 +4,4 @@
   %p Hike image
   = file_field :hike, :hike_image, accept: 'image/jpeg,image/gif,image/png'
 
-  = debug(@hike)
-  = debug(session["tmp_hikeID"])
   = submit_tag 'Create hike'
