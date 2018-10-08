@@ -7,6 +7,12 @@
     = csrf_meta_tags
     = stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track': 'reload'
     = javascript_include_tag 'application', 'data-turbolinks-track': 'reload'
+    %meta{:content => "text/html; charset=UTF-8", "http-equiv" => "Content-Type"}/
+    %meta{:charset => "utf-8"}/
+    %link{:href => "http://cdn.leafletjs.com/leaflet-0.7/leaflet.css", :rel => "stylesheet"}/
+    %script{:src => "http://cdn.leafletjs.com/leaflet-0.7/leaflet.js"}
+    %script{:src => "https://d3js.org/d3.v3.min.js", :type => "text/javascript"}
+
 
 %body
   %header.navbar.navbar-fixed-top.navbar-inverse

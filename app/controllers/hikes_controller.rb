@@ -1,6 +1,6 @@
 class HikesController < ApplicationController
 
-  before_action :authenticate_user, :only => [:new, :create, :index, :show, :upload_hike_photo_setup, :upload_hike_photo_update]
+  before_action :authenticate_user, :only => [:new, :create, :index, :show, :hike_photo_upload_setup, :hike_photo_upload_update]
 
   def index
     @hikes = Hike.all.order(:created_at)
@@ -16,6 +16,7 @@ class HikesController < ApplicationController
     @user = User.find(session[:user_id])
     gon.map_route = @hike.route
     @favorite = Favorite.where(user_id: @user.id, favoritable_id: @hike.id)
+    @comments = Comment.where(hike_id: @hike.id)
   end
 
   def create
