@@ -58,12 +58,21 @@ class SessionsController < ApplicationController
 
 
     else
-      if (params[:condemners].nil? || params[:condemners].empty?)
-        @hikes = pag(Hike.all)
+      if params[:args] != ""
+        if (params[:condemners].nil? || params[:condemners].empty?)
+          @hikes = pag(Hike.where(name: params[:args]))
+        else
+          @hikes = pag(Hike.where.not("user_id = ?", params[:condemners]).where(name: params[:args]))
+        end
+        @users = pag(User.where(nickname: params[:args]))
       else
-        @hikes = pag(Hike.where.not("user_id = ?", params[:condemners]))
+        if (params[:condemners].nil? || params[:condemners].empty?)
+          @hikes = pag(Hike.all)
+        else
+          @hikes = pag(Hike.where.not("user_id = ?", params[:condemners]))
+        end
+        @users = pag(User.all)
       end
-      @users = pag(User.all)
     end
   end
 
