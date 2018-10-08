@@ -1,5 +1,5 @@
 class SessionsController < ApplicationController
-  ######DA CONTROLLARE LE AZIONI POSSIBILI QUANDO NON SI E AUTENTICATI
+
   before_action :authenticate_user, :only => [:home, :profile, :setting, :index, :change_email, :update_email, :change_password, :update_password,
   :change_nickname, :update_nickname, :logout, :set_profile_private, :show_favorites,
   :add_hike_to_favorites, :remove_hike_from_favorites]
@@ -84,21 +84,18 @@ class SessionsController < ApplicationController
 
   def add_hike_to_favorites
     @user = User.find(session[:user_id])
-    @hike = Hike.find(params[:format])
-    association = @user.favorites.new(favoritable: @hike)
-    if association.save
+    if @user.active_favorite_relationships.create(favoritable_id: params[:format].to_i)
       flash[:notice] = "Successfully added to my favorite hikes"
     else
-      flash[:warning] = "cannot add to my favorite hikes"
+      flash[:warning] = "cannot add to my favorites hikes"
     end
-    redirect_to home_path
+    redirect_to hike_path(params[:format])
   end
 
   def remove_hike_from_favorites
     @user = User.find(session[:user_id])
-    @to_delete = Favorite.where(user_id: @user.id, favoritable_id: params[:format])
 
-    if Favorite.destroy(@to_delete.ids)
+    if @user.favorites.delete(Hike.find(params[:format]))
       flash[:notice] = "Successfully removed from favorites"
     else
       flash[:warning] = "cannot remove it from favorites"
