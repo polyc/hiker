@@ -28,8 +28,6 @@ gem 'omniauth-facebook'
 gem 'devise', '~> 4.2'
 # Use Geocoder gem for handling space coordinates
 gem 'geocoder'
-# Use gmaps4rails for google maps
-gem 'gmaps4rails'
 #Use polyline to draw path on gmaps
 gem 'polylines'
 #Use mini_magick and carrierwave for image upload
@@ -89,7 +87,6 @@ group :test do
   gem 'capybara'
   gem 'database_cleaner'
   gem 'factory_bot_rails'
-  gem 'metric_fu'
   gem 'launchy'
   gem 'selenium-webdriver'
 end
