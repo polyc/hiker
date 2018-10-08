@@ -26,8 +26,10 @@ class SessionsController < ApplicationController
     @user = User.find(session[:user_id])
     params[:condemners] = @user.condemners.ids
 
+    ########CASO PRESENZA FILTRI
     if params[:filters] != nil
 
+      #######FILTRO HIKE
       if params[:filters].include?('H')
         if params[:args] != ""
           if (params[:condemners].nil? || params[:condemners].empty?)
@@ -41,7 +43,7 @@ class SessionsController < ApplicationController
           @hikes = pag(Hike.where.not("user_id = ?", params[:condemners]))
         end
 
-
+      #########FILTRO UTENTE E/O CITTA'
       elsif params[:filters].include?('U')
         if params[:filters].include?('C')
           if params[:args] != ""
@@ -56,7 +58,7 @@ class SessionsController < ApplicationController
         end
       end
 
-
+    ##############CASO NESSUN FILTRO
     else
       if params[:args] != ""
         if (params[:condemners].nil? || params[:condemners].empty?)
@@ -81,7 +83,8 @@ class SessionsController < ApplicationController
   def home
     id = session[:user_id]
     @user = User.find(id)
-    @hikes = pag(Hike.all.where(user_id: @user.following.select("followed_id")).order(:created_at).reverse_order)
+    @hikePrefArray = @user.hike_pref.gsub('["','').gsub('"]','').gsub(' ', '').gsub('"','').split(',')
+    @hikes = pag(Hike.all.where(user_id: @user.following.select("followed_id"), :tipo => @hikePrefArray).order(:created_at).reverse_order)
   end
 ##############################################################
   def profile
