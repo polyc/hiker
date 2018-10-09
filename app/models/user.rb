@@ -48,8 +48,8 @@ class User < ActiveRecord::Base
 
   def check_city
     result = Geocoder.search(city)
-    if result.empty?
-      errors.add(:city, "should be a real city")
+    if result.empty? || result.nil?
+      result = false
     else
       result = true
     end
@@ -57,8 +57,9 @@ class User < ActiveRecord::Base
 
     # Validates the size of an uploaded picture.
   def image_size
-    if image.size > 1.megabytes
-      errors.add(:image, "should be less than 1MB")
+
+    if self.image.size > 1.megabytes
+      errors[:image] << "should be less than 1MB"
     end
   end
 

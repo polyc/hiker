@@ -19,24 +19,38 @@ class Hike < ActiveRecord::Base
 
   attr_accessor :filename
 
-  FILENAME_REGEX = /\.gpx$/i
+  #FILENAME_REGEX = /A\.gpx$/i\z/
 
   validates :name, :presence => true, :length => { :in => 1..20 }
   validates :difficulty, :presence => true, :inclusion => { :in => %w( P I E )}
   #validates :filename, :format => FILENAME_REGEX
-  #validates :nature, :length => { :in 0..128 }
+  validates :nature,  :length => { :in => 1..256 }, :allow_blank => true
+  validates :equipment,  :length => { :in => 1..256 }, :allow_blank => true
+  validates :description,  :length => { :in => 1..256 }, :allow_blank => true
   validates :rating, :presence => true, :inclusion => 0..5
   validates :tipo, :presence => true, :inclusion =>  { :in => %w( T E EE EEA EAI ) }
 
-  before_save :parse_gpx
-  before_save :image_size
+  before_save :parse_gpx, :image_size
   after_save :destroy_gpxfile
 
+  def file_format
+    if valid_extension? self.filename
+      result = true
+    else
+      result = false
+    end
+
+  end
+
+  def valid_extension?(filename)
+    ext = File.extname(filename)
+    %w( .gpx ).include? ext.downcase
+  end
 
   # Validates the size of uploaded picture.
   def image_size
-    if hike_image.size > 1.megabytes
-      errors.add(:hike_image, "should be less than 1MB")
+    if self.hike_image.size > 1.megabytes
+      hike_image = nil
     end
   end
 
@@ -50,7 +64,7 @@ class Hike < ActiveRecord::Base
       finish_time = 0.0
       length = 0.0
 
-      if filename.present?
+      if filename.present? && file_format
         file = File.open(filename)
         doc = Nokogiri::XML(file)
         trackpoints = doc.xpath('//xmlns:trkpt')
