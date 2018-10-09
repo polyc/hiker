@@ -3,6 +3,7 @@ class HikesController < ApplicationController
   before_action :authenticate_user, :only => [:new, :create, :index, :show, :hike_photo_upload_setup, :hike_photo_upload_update]
 
   def index
+    redirect_to home_path
     @hikes = Hike.all.order(:created_at)
   end
 

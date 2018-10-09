@@ -8,6 +8,7 @@ class UsersController < ApplicationController
      :hike_preferencies_upload, :delete_user]
 
   def index
+    redirect_to home_path
     @users = User.all.order(:nickname)
   end
 
