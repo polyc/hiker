@@ -14,7 +14,10 @@
               .li.hike Rating: #{h.rating}
               .li.hike Distance: #{h.distance}
               .li.hike
-                = link_to "#{author.nickname}", user_path(author)
+                -if session[:user_id] == h.user_id
+                  = link_to "#{author.nickname}", profile_path(author)
+                -else
+                  = link_to "#{author.nickname}", user_path(author)
           .row.hike-info
             = link_to 'More info', hike_path(h)
           .row.hike-info
