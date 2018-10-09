@@ -1,9 +1,7 @@
 class Favorite < ActiveRecord::Base
-  belongs_to :favoritable, polymorphic: true
-  belongs_to :user, inverse_of: :favorites
+  belongs_to :favoritable, class_name: "Hike"
+  belongs_to :favoriter, class_name: "User"
 
-  validates :user_id, uniqueness: {
-    scope: [:favoritable_id, :favoritable_type],
-    message: 'can only favorite an item once'
-  }
+    validates :favoriter_id, presence: true
+    validates :favoritable_id, presence: true
 end

@@ -123,7 +123,7 @@ class UsersController < ApplicationController
   def remove_from_banned_users
     @user = User.find(session[:user_id])
     @banned = User.find(params[:format])
-    @user.unban(User.find(params[:format]))
+    @user.unban(@banned)
     redirect_to user_path(@banned)
   end
 

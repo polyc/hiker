@@ -30,27 +30,27 @@
               = link_to "follow", add_following_path(@user), method: :post
 
 
-
-.completed-hikes
-  - @user_hikes.each do |h|
-    %header.hike-title #{h.name}
-    .row.content
-      .columns
-        %hike-photo-col
-          = image_tag h.hike_image.url,:class=> "hike-photo" if h.hike_image?
-        %aside.hike-description #{h.description}
-        %aside.hike-info-box
-          .row.hike-info-brief
-            .ul
-              .li.hike Type: #{h.tipo}
-              .li.hike Rating: #{h.rating}
-              .li.hike Distance: #{h.distance}
-          .row.hike-info
-            = link_to 'More info', hike_path(h)
-          .row.hike-info
-            -if @current_user.favorites.nil? || @current_user.favorites.where(user_id: @current_user.id, favoritable_id: h.id).empty?
-              = link_to 'Aggiungi ai preferiti', add_hike_to_favorites_path(h), method: :post
-            -else
-              = link_to 'Rimuovi dai preferiti', remove_hike_from_favorites_path(h), method: :post
-          %br
-  = will_paginate @user_hikes
+-if (@user.private_profile == 1 && @current_user.following?(@user)) || @user.private_profile.nil?
+  .completed-hikes
+    - @user_hikes.each do |h|
+      %header.hike-title #{h.name}
+      .row.content
+        .columns
+          %hike-photo-col
+            = image_tag h.hike_image.url,:class=> "hike-photo" if h.hike_image?
+          %aside.hike-description #{h.description}
+          %aside.hike-info-box
+            .row.hike-info-brief
+              .ul
+                .li.hike Type: #{h.tipo}
+                .li.hike Rating: #{h.rating}
+                .li.hike Distance: #{h.distance}
+            .row.hike-info
+              = link_to 'More info', hike_path(h)
+            .row.hike-info
+              -if @current_user.favorites.nil? || @current_user.favorites.where(id: h.id).empty?
+                = link_to 'Aggiungi ai preferiti', add_hike_to_favorites_path(h), method: :post
+              -else
+                = link_to 'Rimuovi dai preferiti', remove_hike_from_favorites_path(h), method: :post
+            %br
+    = will_paginate @user_hikes

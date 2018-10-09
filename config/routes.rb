@@ -10,7 +10,7 @@ Rails.application.routes.draw do
     resources :comments
   end
 
-  root :to => redirect('/users')
+  root :to => redirect('/signup')
   get "signup", :to => "users#new"
   get "hike_preferencies_setup", :to => "users#hike_preferencies_setup"
   put "hike_preferencies_setup", :to => "users#hike_preferencies_update"

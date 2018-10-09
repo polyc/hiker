@@ -7,7 +7,9 @@ class Hike < ActiveRecord::Base
   has_many :comments, :dependent => :destroy
   belongs_to :user
 
-  has_many :favorites, as: :favoritable
+  has_many :passive_favorite_relationships, class_name:  "Favorite", foreign_key: "favoritable_id", dependent: :destroy
+  has_many :favoriters, through: :passive_favorite_relationships, source: :favoriter
+
 
   def self.all_ratings ; %w[ 0 0.5 1 1.5 2 2.5 3 3.5 4 4.5 5 ] ; end
   def self.all_types ; %w[ T E EE EEA EAI ] ; end

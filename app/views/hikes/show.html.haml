@@ -16,7 +16,7 @@
               Author:
               = link_to "#{author.nickname}", user_path(author)
         .row.hike-info
-          -if @user.favorites.nil? || @user.favorites.where(user_id: @user.id, favoritable_id: @hike.id).empty?
+          -if @user.favorites.nil? || @user.favorites.where(id: @hike.id).empty?
             = link_to 'Aggiungi ai preferiti', add_hike_to_favorites_path(@hike), method: :post
           -else
             = link_to 'Rimuovi dai preferiti', remove_hike_from_favorites_path(@hike), method: :post
