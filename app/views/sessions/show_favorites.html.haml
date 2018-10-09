@@ -1,7 +1,7 @@
 .favorites
   -if @favorites != nil
     - @favorites.each do |h|
-      = author = User.find(h.user_id)
+      - author = User.find(h.user_id)
       %header.hike-title #{h.name}
       .row.content
         .columns
@@ -16,7 +16,10 @@
                 .li.hike Distance: #{h.distance}
                 .li.hike
                   Author:
-                  = link_to "#{author.nickname}", user_path(author)
+                  -if session[:user_id] == h.user_id
+                    = link_to "#{author.nickname}", profile_path(author)
+                  -else
+                    = link_to "#{author.nickname}", user_path(author)
             .row.hike-info
               = link_to 'More info', hike_path(h)
   = will_paginate @favorites

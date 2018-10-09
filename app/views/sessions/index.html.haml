@@ -35,7 +35,11 @@
                   .li.hike Type: #{h.tipo}
                   .li.hike Rating: #{h.rating}
                   .li.hike Distance: #{h.distance}
-                  .li.hike= link_to "#{author.nickname}", user_path(author)
+                  .li.hike
+                    -if session[:user_id] == h.user_id
+                      = link_to "#{author.nickname}", profile_path(author)
+                    -else
+                      = link_to "#{author.nickname}", user_path(author)
               .row.hike-info
                 = link_to 'More info', hike_path(h)
               .row.hike-info
@@ -50,7 +54,10 @@
       -if @users != nil
         - @users.each do |u|
           %header.user-title
-            =link_to "#{u.nickname}", user_path(u)
+            -if session[:user_id] == u.id
+              =link_to "#{u.nickname}", profile_path(u)
+            -else
+              =link_to "#{u.nickname}", user_path(u)
           .row.content
             .columns
               %user-photo-col
