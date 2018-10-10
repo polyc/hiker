@@ -17,7 +17,7 @@
               = select :user, :gender, %w(male female not-specified)
             .li.signup.signup-data
               Birthday&nbsp;
-              = date_select :user, :birthdate
+              = date_select :user, :birthdate, :start_year => 1920
             .li.signup.signup-data
               City&nbsp;
               = text_field :user, :city
