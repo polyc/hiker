@@ -1,24 +1,24 @@
-# README
+# Hiker
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+This is a bachelor graduation final project on Engineering in Computer Science at Sapienza University of Rome.  
+It's basically a social network prototype for excursionist.
+It's written in Ruby with the support of
+Rails 5.1.5.  
+**Only local deployment is available at current state.**
 
-Things you may want to cover:
 
-* Ruby version
 
-* System dependencies
 
-* Configuration
+## Configuration
 
-* Database creation
+* Install Rmagick: `apt-get install libmagickwand-dev`
 
-* Database initialization
+* Install Mini-Magick: `apt-get install imagemagick`
 
-* How to run the test suite
+* Setup Selenium automated browser-test driver
 
-* Services (job queues, cache servers, search engines, etc.)
+* Now move to repository folder and run `bundle install --without production `
 
-* Deployment instructions
+* Initialize SQLite DBs with `rails db: migrate`
 
-* ...
+* Start local server with `rails server`
