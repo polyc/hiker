@@ -25,7 +25,7 @@ gem 'bcrypt-ruby', :require => 'bcrypt'
 # Use OmniAuth for third party authentication
 gem 'omniauth-facebook'
 #Use Devise for third-party auth
-gem 'devise', '~> 4.2'
+gem 'devise', '~> 4.7'
 # Use Geocoder gem for handling space coordinates
 gem 'geocoder'
 #Use polyline to draw path on gmaps
